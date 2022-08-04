@@ -13,3 +13,16 @@ export async function signIn(req: Request, res: Response) {
     const token = await authService.login(user);
     res.status(200).send({token});
 }
+
+export async function updateUser(req: Request, res: Response) {
+    const {id} = req.params; 
+    const user = req.body;   
+    await authService.updateUser(+id, user);
+    res.sendStatus(200);
+}
+
+export async function deleteUser(req: Request, res: Response) {
+    const {id} = req.params;  
+    await authService.deleteUser(+id);
+    res.sendStatus(200);
+}

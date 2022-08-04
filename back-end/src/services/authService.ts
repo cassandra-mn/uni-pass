@@ -23,3 +23,20 @@ export async function login(userData: UserData) {
     const token = jwt.sign(user, process.env.JWT_SECRET);
     return token;
 }
+
+export async function updateUser(id: number, user: CreateUser) {
+    await validateUser(id);
+    
+    const password: string = bcrypt.hashSync(user.password, 10);
+    await authRepository.updateUser(id, {...user, password});
+}
+
+export async function deleteUser(id: number) {
+    await validateUser(id);
+    await authRepository.deleteUser(id);
+}
+
+async function validateUser(id: number) {
+    const existingUser = await authRepository.findUserById(id);
+    if (!existingUser) throw {type: 'not_found', message: 'usuário não encontrado'};
+} 
