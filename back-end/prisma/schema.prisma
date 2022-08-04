@@ -6,3 +6,88 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id            Int         @id @default(autoincrement())
+  email         String      @unique
+  password      String
+  name          String
+  Discipline    Discipline[]
+  Timetable     Timetable[]
+  Task          Task[]
+  Test          Test[]
+
+  @@map("users")
+}
+
+model Discipline {
+  id            Int         @id @default(autoincrement())
+  discipline    String
+  teacher       String
+  clasroom      String
+  color         Colors   
+  userId        Int
+  user          User        @relation(fields: [userId], references: [id])
+  timetable     Timetable[]
+  task          Task[]
+  test          Test[]
+
+  @@unique([discipline, userId])
+  @@map("disciplines")
+}
+
+enum Colors {
+  white
+  blue
+  //acrescentar cores
+}
+
+model Timetable {
+  id            Int         @id @default(autoincrement())
+  startTime     DateTime
+  finalTime     DateTime
+  day           Days
+  disciplineId  Int
+  discipline    Discipline  @relation(fields: [disciplineId], references: [id])
+  userId        Int
+  user          User        @relation(fields: [userId], references: [id])
+
+  @@map("timetables")
+}
+
+enum Days {
+  sunday
+  monday
+  tuesday
+  wednesday
+  thursday
+  friday
+  saturday
+}
+
+model Task {
+  id            Int         @id @default(autoincrement())
+  task          String
+  startDate     DateTime    @default(now())
+  finalDate     DateTime  
+  disciplineId  Int
+  discipline    Discipline  @relation(fields: [disciplineId], references: [id])               
+  userId        Int
+  user          User        @relation(fields: [userId], references: [id])
+
+  @@unique([task, disciplineId])
+  @@map("tasks")
+}
+
+model Test {
+  id            Int         @id @default(autoincrement())
+  test          String  
+  date          DateTime
+  disciplineId  Int
+  discipline    Discipline  @relation(fields: [disciplineId], references: [id])
+  userId        Int
+  user          User        @relation(fields: [userId], references: [id])
+
+  @@unique([test, disciplineId])
+  @@map("tests")
+}
