@@ -8,29 +8,25 @@ datasource db {
 }
 
 model User {
-  id            Int         @id @default(autoincrement())
-  email         String      @unique
-  password      String
-  name          String
-  Discipline    Discipline[]
-  Timetable     Timetable[]
-  Task          Task[]
-  Test          Test[]
+  id                 Int         @id @default(autoincrement())
+  email              String      @unique
+  password           String
+  name               String
+  Discipline         Discipline[]
+  disciplineUser     DisciplineUser[]
 
   @@map("users")
 }
 
 model Discipline {
-  id            Int         @id @default(autoincrement())
-  discipline    String
-  teacher       String
-  clasroom      String
-  color         Colors   
-  userId        Int
-  user          User        @relation(fields: [userId], references: [id])
-  timetable     Timetable[]
-  task          Task[]
-  test          Test[]
+  id                 Int         @id @default(autoincrement())
+  discipline         String
+  teacher            String
+  clasroom           String
+  color              Colors   
+  userId             Int
+  user               User        @relation(fields: [userId], references: [id])
+  DisciplineUser     DisciplineUser[]
 
   @@unique([discipline, userId])
   @@map("disciplines")
@@ -42,15 +38,27 @@ enum Colors {
   //acrescentar cores
 }
 
+model DisciplineUser {
+  id                Int         @id @default(autoincrement())
+  disciplineId      Int
+  discipline        Discipline  @relation(fields: [disciplineId], references: [id])
+  userId            Int
+  user              User        @relation(fields: [userId], references: [id])
+  Timetable         Timetable[]
+  Task              Task[]
+  Test              Test[]
+
+  @@unique([disciplineId, userId])
+  @@map("disciplinesUsers")
+}
+
 model Timetable {
-  id            Int         @id @default(autoincrement())
-  startTime     DateTime
-  finalTime     DateTime
-  day           Days
-  disciplineId  Int
-  discipline    Discipline  @relation(fields: [disciplineId], references: [id])
-  userId        Int
-  user          User        @relation(fields: [userId], references: [id])
+  id                Int         @id @default(autoincrement())
+  day               Days
+  startTime         DateTime
+  finalTime         DateTime
+  disciplineUserId  Int
+  disciplineUser    DisciplineUser  @relation(fields: [disciplineUserId], references: [id])
 
   @@map("timetables")
 }
@@ -66,28 +74,24 @@ enum Days {
 }
 
 model Task {
-  id            Int         @id @default(autoincrement())
-  task          String
-  startDate     DateTime    @default(now())
-  finalDate     DateTime  
-  disciplineId  Int
-  discipline    Discipline  @relation(fields: [disciplineId], references: [id])               
-  userId        Int
-  user          User        @relation(fields: [userId], references: [id])
+  id                Int         @id @default(autoincrement())
+  task              String
+  startDate         DateTime    @default(now())
+  finalDate         DateTime  
+  disciplineUserId  Int
+  disciplineUser    DisciplineUser  @relation(fields: [disciplineUserId], references: [id])
 
-  @@unique([task, disciplineId])
+  @@unique([task, disciplineUserId])
   @@map("tasks")
 }
 
 model Test {
-  id            Int         @id @default(autoincrement())
-  test          String  
-  date          DateTime
-  disciplineId  Int
-  discipline    Discipline  @relation(fields: [disciplineId], references: [id])
-  userId        Int
-  user          User        @relation(fields: [userId], references: [id])
+  id                Int         @id @default(autoincrement())
+  test              String  
+  date              DateTime
+  disciplineUserId  Int
+  disciplineUser    DisciplineUser  @relation(fields: [disciplineUserId], references: [id])
 
-  @@unique([test, disciplineId])
+  @@unique([test, disciplineUserId])
   @@map("tests")
 }
