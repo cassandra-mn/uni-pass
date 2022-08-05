@@ -20,3 +20,7 @@ export async function findDisciplineById(id: number, userId: number) {
 export async function updateDiscipline(id: number, userId: number, discipline: CreateDiscipline) {
     await prisma.discipline.updateMany({where: {id, userId}, data: discipline});
 }
+
+export async function deleteDiscipline(id: number, userId: number) {
+    await prisma.discipline.deleteMany({where: {id, userId}});
+}
