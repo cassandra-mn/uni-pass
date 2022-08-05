@@ -14,8 +14,6 @@ export async function findDisciplines(req: Request, res: Response) {
     const {userId} = res.locals;
 
     const disciplines = await disciplineService.findDisciplines(+userId);
-    if (!disciplines) throw {type: 'not_found', message: 'não há disciplinas cadastradas'};
-
     res.status(200).send(disciplines);
 }
 
@@ -24,14 +22,16 @@ export async function findDisciplineById(req: Request, res: Response) {
     const {userId} = res.locals;
 
     const discipline = await disciplineService.findDisciplineById(+id, +userId);
-    if (!discipline) throw {type: 'not_found', message: 'disciplina não encontrada'};
-
     res.status(200).send(discipline);
 }
 
 export async function updateDiscipline(req: Request, res: Response) {
-
-    res.sendStatus(501);
+    const {id} = req.params;
+    const {userId} = res.locals;
+    const discipline = req.body;
+    
+    await disciplineService.updateDiscipline(+id, +userId, discipline);
+    res.sendStatus(200);
 }
 
 export async function deleteDiscipline(req: Request, res: Response) {
