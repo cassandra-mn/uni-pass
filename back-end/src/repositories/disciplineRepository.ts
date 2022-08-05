@@ -8,3 +8,11 @@ export async function createDiscipline(discipline: CreateDiscipline, userId: num
 export async function findDisciplineByName(discipline: string, userId: number) {
     return await prisma.discipline.findUnique({where: {discipline_userId: {discipline, userId}}});
 }
+
+export async function findDisciplines(userId: number) {
+    return await prisma.discipline.findMany({where: {userId}});
+}
+
+export async function findDisciplineById(id: number, userId: number) {
+    return await prisma.discipline.findFirst({where: {id, userId}});
+}
