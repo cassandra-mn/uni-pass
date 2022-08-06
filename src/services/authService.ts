@@ -21,7 +21,7 @@ export async function login(userData: UserData) {
     if (!user || !isOk) throw {type: 'unauthorized', message: 'e-mail ou senha incorretos'};
 
     const token = jwt.sign(user, process.env.JWT_SECRET);
-    return token;
+    return {userId: user.id, token};
 }
 
 export async function updateUser(id: number, user: CreateUser) {
