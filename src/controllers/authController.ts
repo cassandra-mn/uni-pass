@@ -14,6 +14,12 @@ export async function signIn(req: Request, res: Response) {
     res.status(200).send(response);
 }
 
+export async function getUserById(req: Request, res: Response) {
+    const {id} = req.params;
+    const user = await authService.getUserById(+id);
+    res.status(200).send(user);
+}
+
 export async function updateUser(req: Request, res: Response) {
     const {id} = req.params; 
     const user = req.body;   

@@ -18,8 +18,8 @@ export default function SignUp() {
         try {
             const response = await axios.post(`${URL}/sign-in`, data);
             const serializedData = JSON.stringify(response.data);
-            localStorage.setItem("data", serializedData);
-            navigate('/');
+            localStorage.setItem('data', serializedData);
+            navigate('/user/update');
         } catch(e) {
             alert(e.response.data);
         }
@@ -31,6 +31,10 @@ export default function SignUp() {
                 <Input placeholder='e-mail' type='email' required value={data.email} onChange={e => setData({...data, email: e.target.value})}/>
                 <Input placeholder='senha' type='password' required value={data.password} onChange={e => setData({...data, password: e.target.value})}/>
                 <Button type='submit'>Entrar</Button>
+                <MoreOptions>
+                    Ainda não tem uma conta?
+                    <Register onClick={() => navigate('/sign-up')}>Cadastre-se</Register>
+                </MoreOptions>
             </Form>
         </Container>
     );
@@ -49,5 +53,13 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
+
+`;
+
+const MoreOptions = styled.div`
+
+`;
+
+const Register = styled.button`
 
 `;

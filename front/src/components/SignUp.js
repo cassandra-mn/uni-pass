@@ -31,6 +31,10 @@ export default function SignUp() {
                 <Input placeholder='e-mail' type='email' required value={data.email} onChange={e => setData({...data, email: e.target.value})}/>
                 <Input placeholder='senha' type='password' required value={data.password} onChange={e => setData({...data, password: e.target.value})}/>
                 <Button type='submit'>Cadastrar</Button>
+                <MoreOptions>
+                    Já tem uma conta?
+                    <Login onClick={() => navigate('/sign-in')}>Entre</Login>
+                </MoreOptions>
             </Form>
         </Container>
     );
@@ -49,5 +53,13 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
+
+`;
+
+const MoreOptions = styled.div`
+
+`;
+
+const Login = styled.button`
 
 `;
