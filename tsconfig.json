@@ -5,6 +5,7 @@
       "esModuleInterop": true,
       "moduleResolution": "node"
     },
+    "include": ["src/**/*", "prisma"],
     "ts-node": {
       "esm": true
     }
