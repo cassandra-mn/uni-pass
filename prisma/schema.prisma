@@ -25,7 +25,7 @@ model Discipline {
   clasroom           String
   color              Colors   
   userId             Int
-  user               User        @relation(fields: [userId], references: [id])
+  user               User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   DisciplineUser     DisciplineUser[]
 
   @@unique([discipline, userId])
@@ -41,9 +41,9 @@ enum Colors {
 model DisciplineUser {
   id                Int         @id @default(autoincrement())
   disciplineId      Int
-  discipline        Discipline  @relation(fields: [disciplineId], references: [id])
+  discipline        Discipline  @relation(fields: [disciplineId], references: [id], onDelete: Cascade)
   userId            Int
-  user              User        @relation(fields: [userId], references: [id])
+  user              User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   Timetable         Timetable[]
   Task              Task[]
   Test              Test[]

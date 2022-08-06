@@ -29,6 +29,7 @@ export async function updateUser(req: Request, res: Response) {
 
 export async function deleteUser(req: Request, res: Response) {
     const {id} = req.params;  
-    await authService.deleteUser(+id);
+    const {confirmPassword} = req.body;
+    await authService.deleteUser(+id, confirmPassword);
     res.sendStatus(200);
 }

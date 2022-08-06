@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const URL = 'http://localhost:5000';
 
-export default function UserPage() {
+export default function UserUpdate() {
     const navigate = useNavigate();
     const data = localStorage.getItem("data");
     const {userId, token} = JSON.parse(data);

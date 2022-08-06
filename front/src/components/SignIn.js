@@ -19,7 +19,7 @@ export default function SignUp() {
             const response = await axios.post(`${URL}/sign-in`, data);
             const serializedData = JSON.stringify(response.data);
             localStorage.setItem('data', serializedData);
-            navigate('/user/update');
+            navigate('/home');
         } catch(e) {
             alert(e.response.data);
         }

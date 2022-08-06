@@ -33,17 +33,20 @@ export async function updateUser(id: number, user: CreateUser) {
     await authRepository.updateUser(id, {...userData, ...user});
 }
 
-export async function deleteUser(id: number) {
-    await validateUser(id);
+export async function deleteUser(id: number, confirmPassword: string) {
+    const user = await validateUser(id);
+    
+    const correctPassword = user ? bcrypt.compareSync(confirmPassword, user.password) : undefined;
+    if (!correctPassword) throw {type: 'unauthorized', message: 'senha incorreta'};
 
     await authRepository.deleteUser(id);
 }
 
 async function validateUser(id: number) {
-    const existingUser = await authRepository.findUserById(id);
-    if (!existingUser) throw {type: 'not_found', message: 'usuário não encontrado'};
+    const user = await authRepository.findUserById(id);
+    if (!user) throw {type: 'not_found', message: 'usuário não encontrado'};
 
-    return existingUser;
+    return user;
 } 
 
 async function verifyConflict(user: CreateUser) {
