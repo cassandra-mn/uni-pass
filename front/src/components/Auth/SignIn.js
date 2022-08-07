@@ -12,6 +12,8 @@ export default function SignUp() {
         password: ''
     });
 
+    localStorage.clear();
+
     async function login(e) {
         e.preventDefault();
 
