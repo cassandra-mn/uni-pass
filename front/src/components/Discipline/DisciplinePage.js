@@ -6,7 +6,7 @@ export default function HomePage() {
 
     return (
         <Container>
-            <Button onClick={() => navigate('/user')}>Perfil</Button>
+            <Button onClick={() => navigate('/discipline/create')}>Adicionar Disciplina</Button>
         </Container>
     );
 }
