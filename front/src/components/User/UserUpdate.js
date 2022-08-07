@@ -16,7 +16,7 @@ export default function UserUpdate() {
     useEffect(() => {
         async function getUser() {
             try {
-                const {data} = await axios.get(`${URL}/user/${userId}`);
+                const {data} = await axios.get(`${URL}/user/${userId}`, headers);
                 setUser(data);
             } catch(e) {
                 console.log(e);

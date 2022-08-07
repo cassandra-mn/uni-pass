@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import {CreateUser} from '../services/authService.js';
+import {CreateUser} from '../services/userService.js';
 
 export const UserSchema = Joi.object<CreateUser>({
     email: Joi.string().email().required(),

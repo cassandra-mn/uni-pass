@@ -10,17 +10,16 @@ export default function UserDelete() {
     const data = localStorage.getItem("data");
     const {userId, token} = JSON.parse(data);
     const headers = {headers: {Authorization: `Bearer ${token}`}};
-    const [password, setPassword] = useState();
+    const [password, setPassword] = useState('');
 
     async function exclude() {
         try {
             await axios.post(`${URL}/user/delete/${userId}`, {confirmPassword: password}, headers);
-            Storage.clear();
+            localStorage.clear();
             alert('Usuário deletado!');
-            navigate('/sign-in');
+            navigate('/');
         } catch(e) {
-            console.log(e.response);
-            alert('Não foi possível deletar o usuário, tente novamente mais tarde!');
+            alert(e.response.data);
         }
     }
 

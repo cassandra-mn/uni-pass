@@ -1,6 +1,6 @@
 import {Router} from 'express';
 
-import {signUp, signIn} from '../controllers/userController.js';
+import {signUp, signIn} from '../controllers/authController.js';
 import {validateSchemaMiddleware} from '../middlewares/validateSchemaMiddleware.js';
 import {UserSchema} from '../schemas/userSchema.js';
 
