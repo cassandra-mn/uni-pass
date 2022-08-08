@@ -25,14 +25,14 @@ export default function UserUpdate() {
         getUser();
     }, [URL, userId, headers]);
 
-    async function update() {
+    async function update(e) {
+        e.preventDefault();
         try {
             await axios.put(`${URL}/user/update/${userId}`, user, headers);
             alert('Alterações salvas com sucesso!');
             setRefresh([]);
         } catch(e) {
-            console.log(e.response);
-            alert('Não foi possível salvar as alterações, tente novamente mais tarde!');
+            console.log(e.response.data);
         }
     }
 

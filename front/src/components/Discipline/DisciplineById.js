@@ -1,8 +1,9 @@
 import {useContext, useEffect, useState} from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
+import {Link, useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 
+import DisciplineUpdate from './DisciplineUpdate.js';
 import StorageContext from '../../contexts/StorageContext.js';
 
 export default function DisciplineById() {
@@ -34,7 +35,7 @@ export default function DisciplineById() {
 
     return discipline ? (
         <Container>
-            <Button onClick={() => navigate(`/discipline/update/${id}`)}>Editar</Button>
+            <Link to={`/discipline/update/${id}`} state={discipline}>Editar</Link>
             <Button onClick={exclude}>Excluir disciplina</Button>
             <Discipline>
                 <Infos>

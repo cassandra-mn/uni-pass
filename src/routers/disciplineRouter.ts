@@ -9,7 +9,7 @@ const disciplineRouter = Router();
 disciplineRouter.post('/discipline/create', validateSchemaMiddleware(DisciplineSchema), createDiscipline);
 disciplineRouter.get('/disciplines', findDisciplines);
 disciplineRouter.get('/discipline/:id', findDisciplineById);
-disciplineRouter.put('/discipline/update/:id', validateSchemaMiddleware(DisciplineSchema), updateDiscipline);
+disciplineRouter.put('/discipline/update/:id', updateDiscipline);
 disciplineRouter.delete('/discipline/delete/:id', deleteDiscipline);
 
 export default disciplineRouter;
