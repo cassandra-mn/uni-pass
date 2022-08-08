@@ -24,7 +24,6 @@ export default function UserDelete() {
 
     return (
         <Container>
-            <Button onClick={() => navigate('/user')}>Voltar</Button>
             <Form onSubmit={exclude}>
                 <Label>Digite sua senha</Label>
                 <Input type='password' required value={password} onChange={e => setPassword(e.target.value)}/>

@@ -5,7 +5,7 @@ import axios from 'axios';
 
 import StorageContext from '../../contexts/StorageContext.js';
 
-export default function SignUp() {
+export default function SignUp({changeState}) {
     const navigate = useNavigate();
     const {URL} = useContext(StorageContext);
     const [data, setData] = useState({
@@ -13,6 +13,7 @@ export default function SignUp() {
         password: '',
         name: ''
     });
+    changeState();
 
     async function register(e) {
         e.preventDefault();

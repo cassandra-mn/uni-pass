@@ -5,10 +5,11 @@ import styled from 'styled-components';
 
 import StorageContext from '../../contexts/StorageContext';
 
-export default function HomePage() {
+export default function HomePage({changeState}) {
     const navigate = useNavigate();
     const {headers, URL} = useContext(StorageContext);
     const [disciplines, setDisciplines] = useState();
+    changeState();
     
     useEffect(() => {
         async function getDisciplines() {

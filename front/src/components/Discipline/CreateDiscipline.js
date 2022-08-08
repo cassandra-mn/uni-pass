@@ -42,8 +42,8 @@ export default function CreateDiscipline() {
                 <Input placeholder='Nome do(a) professor(a)' type='text' required value={discipline.teacher} onChange={e => setDiscipline({...discipline, teacher: e.target.value})}/>
                 <Input placeholder='Sala de aula' type='text' required value={discipline.clasroom} onChange={e => setDiscipline({...discipline, clasroom: e.target.value})}/>
                 <Select required value={discipline.color} onChange={e => setDiscipline({...discipline, color: e.target.value})}>
-                    {colors.map(color => {
-                        return <Option key={color.id} value={color.name} background={color.background}>{color.display ? color.display : ''}</Option>
+                    {colors.map((color, id) => {
+                        return <Option key={id} value={color.name} background={color.background}>{color.display ? color.display : ''}</Option>
                     })} 
                 </Select>
                 <Button type='submit'>Cadastrar Disciplina</Button>

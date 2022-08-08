@@ -3,7 +3,6 @@ import {Link, useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 
-import DisciplineUpdate from './DisciplineUpdate.js';
 import StorageContext from '../../contexts/StorageContext.js';
 
 export default function DisciplineById() {

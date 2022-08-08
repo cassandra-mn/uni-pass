@@ -1,9 +1,10 @@
 import {useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
 
-export default function UserPage() {
+export default function UserPage({changeState}) {
     const navigate = useNavigate();
-
+    changeState();
+    
     function logout() {
         const confirm = window.confirm('Tem certeza que deseja sair?');
         if (confirm) {

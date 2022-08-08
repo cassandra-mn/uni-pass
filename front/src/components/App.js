@@ -1,5 +1,7 @@
 import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
+import {useState} from 'react';
 
+import Back from './Back.js';
 import SignUp from './Auth/SignUp.js';
 import SignIn from './Auth/SignIn.js';
 import HomePage from './Home/HomePage.js';
@@ -13,23 +15,25 @@ import DisciplineUpdate from './Discipline/DisciplineUpdate.js';
 import StorageContext from '../contexts/StorageContext.js';
 
 export default function App() {
-    const data = localStorage.getItem("data");
-    const {userId, token} = JSON.parse(data);
-    const headers = {headers: {Authorization: `Bearer ${token}`}};
     const URL = 'http://localhost:5000';
+    const data = localStorage.getItem("data");
+    const locals = data ? JSON.parse(data) : '';
+    const headers = locals ? {headers: {Authorization: `Bearer ${locals.token}`}} : '';
+    const [visible, setVisible] = useState(true);
 
     return (
-        <StorageContext.Provider value={{userId, headers, URL}}>
+        <StorageContext.Provider value={data ? {userId: locals.userId, headers, URL} : {URL}}>
             <BrowserRouter>
+                <Back visible={visible}/>
                 <Routes>
-                    <Route path='/sign-up' element={<SignUp />} />
-                    <Route path='/sign-in' element={<SignIn />} />
                     <Route path='/' element={<Navigate replace to='sign-in' />} />
-                    <Route path='/home' element={<HomePage />} />
-                    <Route path='/user' element={<UserPage />} />
+                    <Route path='/sign-up' element={<SignUp changeState={() => setVisible(false)} />} />
+                    <Route path='/sign-in' element={<SignIn changeState={() => setVisible(false)} />} />
+                    <Route path='/home' element={<HomePage changeState={() => setVisible(false)} />} />
+                    <Route path='/user' element={<UserPage changeState={() => setVisible(true)} />} />
                     <Route path='/user/update' element={<UserUpdate />} />
                     <Route path='/user/delete' element={<UserDelete />} />
-                    <Route path='/discipline' element={<DisciplinePage />} />
+                    <Route path='/discipline' element={<DisciplinePage changeState={() => setVisible(true)} />} />
                     <Route path='/discipline/:id' element={<DisciplineById />} />
                     <Route path='/discipline/create' element={<CreateDiscipline />} />
                     <Route path='/discipline/update/:id' element={<DisciplineUpdate />} />

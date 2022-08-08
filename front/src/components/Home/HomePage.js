@@ -1,9 +1,10 @@
 import {useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
 
-export default function HomePage() {
+export default function HomePage({changeState}) {
     const navigate = useNavigate();
-
+    changeState();
+    
     return (
         <Container>
             <Button onClick={() => navigate('/user')}>Perfil</Button>
