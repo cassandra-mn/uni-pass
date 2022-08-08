@@ -13,8 +13,6 @@ export async function createDiscipline(discipline: CreateDiscipline, userId: num
 
 export async function findDisciplines(userId: number) {
     const disciplines = await disciplineRepository.findDisciplines(userId);
-    if (disciplines.length === 0) throw {type: 'not_found', message: 'não há disciplinas cadastradas'};
-
     return disciplines;
 }
 

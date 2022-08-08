@@ -23,7 +23,7 @@ export default function CreateDiscipline() {
         {name: 'green', background: 'green'},
         {name: 'gray', background: 'gray'},
         {name: 'black', background: 'black'},
-        {name: 'wihite', background: 'wihite'},
+        {name: 'white', background: 'wihite'},
     ];
 
     async function register(e) {
@@ -33,8 +33,7 @@ export default function CreateDiscipline() {
             alert('Disciplina cadastrada!');
             navigate('/discipline');
         } catch(e) {
-            console.log(e.response);
-            alert('Não foi possível cadastrar a disciplina, tente novamente mais tarde!');
+            alert(e.response.data);
         }
     }
 
