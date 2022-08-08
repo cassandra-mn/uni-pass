@@ -30,11 +30,12 @@ export default function HomePage() {
                 {disciplines.length === 0 ? 
                     <p>Não há disciplinas cadastradas!</p>
                     : (disciplines.map(discipline => {
-                        return <Discipline key={discipline.id}>{discipline.discipline}</Discipline>
+                        const {id, discipline: name} = discipline;
+                        return <Discipline onClick={() => navigate(`/discipline/${id}`)} key={id}>{name}</Discipline>
                     }))
                 }
             </Disciplines>
-            </Container>
+        </Container>
     ) : <>Loading</>;
 }
 
@@ -50,6 +51,6 @@ const Disciplines = styled.div`
 
 `;
 
-const Discipline = styled.div`
+const Discipline = styled.button`
 
 `;

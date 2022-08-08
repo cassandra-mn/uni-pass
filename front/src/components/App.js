@@ -7,6 +7,7 @@ import UserPage from './User/UserPage.js';
 import UserUpdate from './User/UserUpdate.js';
 import UserDelete from './User/UserDelete.js';
 import DisciplinePage from './Discipline/DisciplinePage.js';
+import DisciplineById from './Discipline/DisciplineById.js';
 import CreateDiscipline from './Discipline/CreateDiscipline.js';
 import StorageContext from '../contexts/StorageContext.js';
 
@@ -28,6 +29,7 @@ export default function App() {
                     <Route path='/user/update' element={<UserUpdate />} />
                     <Route path='/user/delete' element={<UserDelete />} />
                     <Route path='/discipline' element={<DisciplinePage />} />
+                    <Route path='/discipline/:id' element={<DisciplineById />} />
                     <Route path='/discipline/create' element={<CreateDiscipline />} />
                 </Routes>
             </BrowserRouter>
