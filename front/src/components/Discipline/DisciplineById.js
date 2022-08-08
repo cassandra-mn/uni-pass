@@ -1,11 +1,12 @@
 import {useContext, useEffect, useState} from 'react';
-import {useParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 
 import StorageContext from '../../contexts/StorageContext.js';
 
 export default function DisciplineById() {
+    const navigate = useNavigate();
     const {id} = useParams();
     const {URL, headers} = useContext(StorageContext); 
     const [discipline, setDiscipline] = useState();
@@ -19,9 +20,22 @@ export default function DisciplineById() {
         getDiscipline();
     }, [URL, headers, id]);
 
-    console.log(discipline)
+    async function exclude() {
+        const confirm = window.confirm('Tem certeza que deseja deletar a disciplina?');
+        if (confirm) {
+            try {
+                await axios.delete(`${URL}/discipline/delete/${id}`, headers);
+                navigate('/discipline');
+            } catch(e) {
+                alert(e.response.data);
+            }
+        }
+    }
+
     return discipline ? (
         <Container>
+            <Button onClick={() => navigate(`/discipline/update/${id}`)}>Editar</Button>
+            <Button onClick={exclude}>Excluir disciplina</Button>
             <Discipline>
                 <Infos>
                     <h1>Informações gerais</h1>
@@ -44,6 +58,10 @@ export default function DisciplineById() {
 }
 
 const Container = styled.div`
+
+`;
+
+const Button = styled.button`
 
 `;
 

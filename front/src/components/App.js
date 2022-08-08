@@ -9,6 +9,7 @@ import UserDelete from './User/UserDelete.js';
 import DisciplinePage from './Discipline/DisciplinePage.js';
 import DisciplineById from './Discipline/DisciplineById.js';
 import CreateDiscipline from './Discipline/CreateDiscipline.js';
+import DisciplineUpdate from './Discipline/DisciplineUpdate.js';
 import StorageContext from '../contexts/StorageContext.js';
 
 export default function App() {
@@ -31,6 +32,7 @@ export default function App() {
                     <Route path='/discipline' element={<DisciplinePage />} />
                     <Route path='/discipline/:id' element={<DisciplineById />} />
                     <Route path='/discipline/create' element={<CreateDiscipline />} />
+                    <Route path='/discipline/update/:id' element={<DisciplineUpdate />} />
                 </Routes>
             </BrowserRouter>
         </StorageContext.Provider>
