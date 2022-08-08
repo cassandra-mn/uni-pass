@@ -1,12 +1,13 @@
-import {useState} from 'react';
+import {useContext, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 
-const URL = 'http://localhost:5000';
+import StorageContext from '../../contexts/StorageContext.js';
 
 export default function SignUp() {
     const navigate = useNavigate();
+    const {URL} = useContext(StorageContext);
     const [data, setData] = useState({
         email: '',
         password: ''

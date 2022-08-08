@@ -1,18 +1,17 @@
 import {useNavigate} from 'react-router-dom';
-import {useState} from 'react';
+import {useContext, useState} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
-const URL = 'http://localhost:5000';
+import StorageContext from '../../contexts/StorageContext.js';
 
 export default function UserDelete() {
     const navigate = useNavigate();
-    const data = localStorage.getItem("data");
-    const {userId, token} = JSON.parse(data);
-    const headers = {headers: {Authorization: `Bearer ${token}`}};
+    const {userId, headers, URL} = useContext(StorageContext);
     const [password, setPassword] = useState('');
 
-    async function exclude() {
+    async function exclude(e) {
+        e.preventDefault();
         try {
             await axios.post(`${URL}/user/delete/${userId}`, {confirmPassword: password}, headers);
             localStorage.clear();

@@ -1,15 +1,13 @@
-import {useState} from 'react';
+import {useContext, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components'
 
-const URL = 'http://localhost:5000';
+import StorageContext from '../../contexts/StorageContext.js';
 
 export default function CreateDiscipline() {
     const navigate = useNavigate();
-    const data = localStorage.getItem("data");
-    const {token} = JSON.parse(data);
-    const headers = {headers: {Authorization: `Bearer ${token}`}};
+    const {URL, headers} = useContext(StorageContext);
     const [discipline, setDiscipline] = useState({
         discipline: '',
         teacher: '',
@@ -45,7 +43,7 @@ export default function CreateDiscipline() {
                 <Input placeholder='Sala de aula' type='text' required value={discipline.clasroom} onChange={e => setDiscipline({...discipline, clasroom: e.target.value})}/>
                 <Select required value={discipline.color} onChange={e => setDiscipline({...discipline, color: e.target.value})}>
                     {colors.map(color => {
-                        return <Option value={color.name} background={color.background}>{color.display ? color.display : ''}</Option>
+                        return <Option key={color.id} value={color.name} background={color.background}>{color.display ? color.display : ''}</Option>
                     })} 
                 </Select>
                 <Button type='submit'>Cadastrar Disciplina</Button>

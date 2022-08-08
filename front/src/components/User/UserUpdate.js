@@ -1,15 +1,13 @@
 import {useNavigate} from 'react-router-dom';
-import {useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
-const URL = 'http://localhost:5000';
+import StorageContext from '../../contexts/StorageContext.js';
 
 export default function UserUpdate() {
     const navigate = useNavigate();
-    const data = localStorage.getItem("data");
-    const {userId, token} = JSON.parse(data);
-    const headers = {headers: {Authorization: `Bearer ${token}`}};
+    const {userId, headers, URL} = useContext(StorageContext);
     const [user, setUser] = useState();
     const [refresh, setRefresh] = useState([]);
 
@@ -25,7 +23,7 @@ export default function UserUpdate() {
         }
 
         getUser();
-    }, [userId, token]);
+    }, [URL, userId, headers]);
 
     async function update() {
         try {

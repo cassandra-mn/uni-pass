@@ -14,7 +14,6 @@ export default function HomePage() {
         async function getDisciplines() {
             try {
                 const {data} = await axios.get(`${URL}/disciplines`, headers);
-                console.log(data)
                 setDisciplines(data);
             } catch(e) {
                 alert(e.response.data);    
@@ -22,8 +21,7 @@ export default function HomePage() {
         }
 
         getDisciplines();
-    }, [headers, URL]);
-    console.log(disciplines)
+    }, [URL, headers]);
 
     return disciplines ? (
         <Container>
@@ -32,7 +30,7 @@ export default function HomePage() {
                 {disciplines.length === 0 ? 
                     <p>Não há disciplinas cadastradas!</p>
                     : (disciplines.map(discipline => {
-                        return <Discipline>{discipline.discipline}</Discipline>
+                        return <Discipline key={discipline.id}>{discipline.discipline}</Discipline>
                     }))
                 }
             </Disciplines>

@@ -17,7 +17,7 @@ export default function App() {
     const URL = 'http://localhost:5000';
 
     return (
-        <StorageContext.Provider value={{userId, token, headers, URL}}>
+        <StorageContext.Provider value={{userId, headers, URL}}>
             <BrowserRouter>
                 <Routes>
                     <Route path='/sign-up' element={<SignUp />} />
