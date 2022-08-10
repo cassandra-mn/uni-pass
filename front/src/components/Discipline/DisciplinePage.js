@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import StorageContext from '../../contexts/StorageContext';
 
-export default function HomePage({changeState}) {
+export default function DisciplinePage({changeState}) {
     const navigate = useNavigate();
     const {headers, URL} = useContext(StorageContext);
     const [disciplines, setDisciplines] = useState();
@@ -17,7 +17,8 @@ export default function HomePage({changeState}) {
                 const {data} = await axios.get(`${URL}/disciplines`, headers);
                 setDisciplines(data);
             } catch(e) {
-                alert(e.response.data);    
+                console.log(e.response.data)
+                //alert(e.response.data);    
             }
         }
 

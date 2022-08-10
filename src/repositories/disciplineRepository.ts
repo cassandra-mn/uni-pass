@@ -2,7 +2,8 @@ import prisma from '../config/database.js';
 import {CreateDiscipline} from '../services/disciplineService.js';
 
 export async function createDiscipline(discipline: CreateDiscipline, userId: number) {
-    await prisma.discipline.create({data: {...discipline, userId}});
+    const disciplineCreate = await prisma.discipline.create({data: {...discipline, userId}});
+    await prisma.disciplineUser.create({data: {userId, disciplineId: disciplineCreate.id}});
 }
 
 export async function findDisciplineByName(discipline: string, userId: number) {

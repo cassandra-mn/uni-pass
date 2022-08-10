@@ -1,7 +1,10 @@
 import Joi from 'joi';
+import JoiDate from '@joi/date';
 import {CreateTest} from '../services/testService.js';
 
-export const DisciplineSchema = Joi.object<CreateTest>({
+const joi = Joi.extend(JoiDate);
+
+export const TestSchema = Joi.object<CreateTest>({
     test: Joi.string().required(),
-    date: Joi.date().required()
+    date: joi.date().format('YYYY-MM-DD').required()
 });

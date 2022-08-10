@@ -13,6 +13,8 @@ import DisciplineById from './Discipline/DisciplineById.js';
 import CreateDiscipline from './Discipline/CreateDiscipline.js';
 import DisciplineUpdate from './Discipline/DisciplineUpdate.js';
 import StorageContext from '../contexts/StorageContext.js';
+import TestPage from './Test/TestPage.js';
+import CreateTest from './Test/CreateTest.js';
 
 export default function App() {
     const URL = 'http://localhost:5000';
@@ -37,6 +39,8 @@ export default function App() {
                     <Route path='/discipline/:id' element={<DisciplineById />} />
                     <Route path='/discipline/create' element={<CreateDiscipline />} />
                     <Route path='/discipline/update/:id' element={<DisciplineUpdate />} />
+                    <Route path='/test' element={<TestPage changeState={() => setVisible(true)} />} />
+                    <Route path='/test/create' element={<CreateTest />} />
                 </Routes>
             </BrowserRouter>
         </StorageContext.Provider>
