@@ -13,18 +13,26 @@ export async function findTests(userId: number) {
     return await prisma.disciplineUser.findMany({
         where: {userId},
         select: {
+            id: false,
             tests: {}, 
-            discipline: {}
+            discipline: {
+                select: {
+                    discipline: true,
+                    teacher: true,
+                    clasroom: true,
+                    color: true
+                }
+            }
         }
     });
 }
 
 export async function findTestById(id: number) {
-
+    return await prisma.test.findFirst({where: {id}});
 }
 
-export async function updateTest() {
-
+export async function updateTest(id: number, test: CreateTest) {
+    await prisma.test.updateMany({where: {id}, data: {test: test.test, date: new Date(test.date)}});
 }
 
 export async function deleteTest() {

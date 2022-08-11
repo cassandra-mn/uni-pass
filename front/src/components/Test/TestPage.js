@@ -1,6 +1,7 @@
 import {useContext, useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {AiFillCalendar} from 'react-icons/ai';
+import Popup from 'reactjs-popup';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
@@ -11,10 +12,26 @@ export default function TestPage({changeState}) {
     const navigate = useNavigate();
     const {headers, URL} = useContext(StorageContext);
     const [tests, setTests] = useState();
+    const [test, setTest] = useState({});
+    const [open, setOpen] = useState(false);
+    const closeModal = () => setOpen(false);
     changeState();
 
+    const Update = ({test}) => (
+        <Popup open={open} closeOnDocumentClick onClose={closeModal}>
+            <Modal>
+                <Close onClick={() => setOpen(false)}>x</Close>
+                <Form onSubmit={update}>
+                    <Input placeholder={test.test} type='text' required value={test.test} onChange={e => setTest({...test, test: e.target.value})}/>
+                    <Input placeholder={test.date} type='date' required value={test.date} onChange={e => setTest({...test, date: e.target.value})}/>
+                    <Button type='submit'>Salvar alterações</Button>
+                </Form>
+            </Modal>
+        </Popup>
+    );
+
     useEffect(() => {
-        async function getDisciplines() {
+        async function getTests() {
             try {
                 const {data} = await axios.get(`${URL}/tests`, headers);
                 setTests(data);
@@ -23,8 +40,19 @@ export default function TestPage({changeState}) {
             }
         }
 
-        getDisciplines();
+        getTests();
     }, [URL, headers]);
+
+    async function update(e) {
+        e.preventDefault();
+        try {
+            await axios.put(`${URL}/test/update/${test.id}`, {test: test.test, date: test.date}, headers);
+            alert('Alterações salvas com sucesso!');
+            window.location.reload();
+        } catch(e) {
+            alert(e.response.data);
+        }
+    }
     
     return tests ? (
         <Container>
@@ -34,17 +62,18 @@ export default function TestPage({changeState}) {
                     <p>Não há provas a serem exibidas!</p>
                     : (tests.map(test => {
                         return (
-                            <Test key={test.id}>
+                            <Test key={test.id} onClick={() => setOpen(true) & setTest(test)}>
                                 <p>{test.test}</p>
                                 <p><AiFillCalendar /> {dayjs(test.date).add(1, 'day').format('DD/MM/YYYY')}</p>
                                 <p className='flex'>
                                     <Color background={test.color}></Color>
-                                    <p>{test.discipline}</p>
+                                    <small>{test.discipline}</small>
                                 </p>
                             </Test>
                         ); 
                     }))
                 }
+                <Update test={test} />
             </Tests>
         </Container>
     ) : <>Loading</>;
@@ -70,6 +99,10 @@ const Test = styled.div`
         display: flex;
         align-items: center;
     }
+
+    :hover {
+        cursor: pointer;
+    }
 `;
 
 const Color = styled.div`
@@ -77,4 +110,20 @@ const Color = styled.div`
     height: 10px;
     border-radius: 50%;
     background-color: ${props => props.background};
+`;
+
+const Modal = styled.div`
+
+`;
+
+const Close = styled.a`
+
+`;
+
+const Form = styled.form`
+
+`;
+
+const Input = styled.input`
+
 `;

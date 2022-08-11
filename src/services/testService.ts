@@ -21,8 +21,15 @@ export async function findTests(userId: number) {
     for (let test of tests) {
         const {tests, discipline} = test;
         if (tests.length !== 0) {
-            tests.forEach(test => allTests.push({...test, ...discipline}));
+            tests.forEach(test => allTests.push({id: test.id, ...test, ...discipline}));
         }
     }
     return allTests.sort((i, j) => i.date - j.date);
+}
+
+export async function updateTest(id: number, test: CreateTest) {
+    const validateTest = await testRepository.findTestById(id);
+    if (!validateTest) throw {type: 'not_found', message: 'prova não encontrada'};
+
+    await testRepository.updateTest(id, test);
 }

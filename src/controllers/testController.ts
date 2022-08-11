@@ -17,3 +17,11 @@ export async function findTests(req: Request, res: Response) {
     const tests = await testService.findTests(userId);
     res.status(200).send(tests);
 }
+
+export async function updateTest(req: Request, res: Response) {
+    const {id} = req.params;
+    const test = req.body;
+
+    await testService.updateTest(+id, test);
+    res.sendStatus(200);
+}
