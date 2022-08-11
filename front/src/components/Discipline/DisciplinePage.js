@@ -17,8 +17,7 @@ export default function DisciplinePage({changeState}) {
                 const {data} = await axios.get(`${URL}/disciplines`, headers);
                 setDisciplines(data);
             } catch(e) {
-                console.log(e.response.data)
-                //alert(e.response.data);    
+                alert(e.response.data);    
             }
         }
 

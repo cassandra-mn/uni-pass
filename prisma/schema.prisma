@@ -12,8 +12,8 @@ model User {
   email              String      @unique
   password           String
   name               String
-  Discipline         Discipline[]
-  disciplineUser     DisciplineUser[]
+  disciplines        Discipline[]
+  disciplinesUsers   DisciplineUser[]
 
   @@map("users")
 }
@@ -26,7 +26,7 @@ model Discipline {
   color              Colors   
   userId             Int
   user               User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  DisciplineUser     DisciplineUser[]
+  disciplinesUsers   DisciplineUser[]
 
   @@unique([discipline, userId])
   @@map("disciplines")
@@ -44,9 +44,9 @@ model DisciplineUser {
   discipline        Discipline  @relation(fields: [disciplineId], references: [id], onDelete: Cascade)
   userId            Int
   user              User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  Timetable         Timetable[]
-  Task              Task[]
-  Test              Test[]
+  timetables        Timetable[]
+  tasks             Task[]
+  tests             Test[]
 
   @@unique([disciplineId, userId])
   @@map("disciplinesUsers")

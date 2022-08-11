@@ -10,3 +10,10 @@ export async function createTest(req: Request, res: Response) {
     await testService.createTest(userId, +disciplineId, {test, date});
     res.sendStatus(201);
 } 
+
+export async function findTests(req: Request, res: Response) {
+    const {userId} = res.locals;
+
+    const tests = await testService.findTests(userId);
+    res.status(200).send(tests);
+}

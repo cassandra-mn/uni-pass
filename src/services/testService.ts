@@ -6,9 +6,23 @@ import * as testRepository from '../repositories/testRepository.js';
 export type CreateTest = Omit<Test, "id" | "disciplineUserId">;
 
 export async function createTest(userId: number, disciplineId: number, test: CreateTest) {
-    const testExisting = await testRepository.findTestByName(test.test);
+    const disciplineUser = await utils.findDisciplineUserId(userId, disciplineId);
+    if (!disciplineUser) throw {type: 'not_found', message: 'disciplina não encontrada'}; 
+
+    const testExisting = await testRepository.findTestByName(test.test, disciplineUser.id);
     if (testExisting) throw {type: 'conflict', message: 'prova já cadastrada'}; 
 
-    const disciplineUser = await utils.findDisciplineUserId(userId, disciplineId);
     await testRepository.createTest(disciplineUser.id, test);
+}
+
+export async function findTests(userId: number) {
+    const tests = await testRepository.findTests(userId);
+    const allTests = [];
+    for (let test of tests) {
+        const {tests, discipline} = test;
+        if (tests.length !== 0) {
+            tests.forEach(test => allTests.push({...test, ...discipline}));
+        }
+    }
+    return allTests.sort((i, j) => i.date - j.date);
 }
