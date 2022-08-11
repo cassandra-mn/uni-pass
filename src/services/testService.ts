@@ -28,8 +28,18 @@ export async function findTests(userId: number) {
 }
 
 export async function updateTest(id: number, test: CreateTest) {
-    const validateTest = await testRepository.findTestById(id);
-    if (!validateTest) throw {type: 'not_found', message: 'prova não encontrada'};
+    validateTest(id);
 
     await testRepository.updateTest(id, test);
+}
+
+export async function deleteTest(id: number) {
+    validateTest(id);
+    
+    await testRepository.deleteTest(id);
+}
+
+export async function validateTest(id: number) {
+    const validateTest = await testRepository.findTestById(id);
+    if (!validateTest) throw {type: 'not_found', message: 'prova não encontrada'};
 }

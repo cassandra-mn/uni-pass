@@ -26,6 +26,7 @@ export default function TestPage({changeState}) {
                     <Input placeholder={test.date} type='date' required value={test.date} onChange={e => setTest({...test, date: e.target.value})}/>
                     <Button type='submit'>Salvar alterações</Button>
                 </Form>
+                <Button onClick={() => exclude(test.id)}>Deletar</Button>
             </Modal>
         </Popup>
     );
@@ -51,6 +52,18 @@ export default function TestPage({changeState}) {
             window.location.reload();
         } catch(e) {
             alert(e.response.data);
+        }
+    }
+
+    async function exclude(id) {
+        const confirm = window.confirm('Tem certeza que deseja deletar?');
+        if (confirm) {
+            try {
+                await axios.delete(`${URL}/test/delete/${id}`, headers);
+                window.location.reload();
+            } catch(e) {
+                alert(e.response.data);
+            }
         }
     }
     

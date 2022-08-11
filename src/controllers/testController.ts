@@ -25,3 +25,10 @@ export async function updateTest(req: Request, res: Response) {
     await testService.updateTest(+id, test);
     res.sendStatus(200);
 }
+
+export async function deleteTest(req: Request, res: Response) {
+    const {id} = req.params;
+
+    await testService.deleteTest(+id);
+    res.sendStatus(200);
+}
