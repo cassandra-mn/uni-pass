@@ -24,7 +24,7 @@ export async function findTasks(userId: number) {
             tasks.forEach(task => allTasks.push({id: task.id, ...task, ...discipline}));
         }
     }
-    return allTasks.sort((i, j) => i.date - j.date);
+    return allTasks.sort((i, j) => i.finalDate - j.finalDate);
 }
 
 export async function updateTask(id: number, task: CreateTask) {

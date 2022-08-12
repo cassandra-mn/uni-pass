@@ -1,4 +1,5 @@
 import {useContext, useEffect, useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import {AiFillCalendar} from 'react-icons/ai';
 import axios from 'axios';
 import dayjs from 'dayjs';
@@ -7,10 +8,10 @@ import styled from 'styled-components';
 import StorageContext from '../../contexts/StorageContext.js';
 
 export default function TaskPage({changeState}) {
+    const navigate = useNavigate();
     const {headers, URL} = useContext(StorageContext);
     const [tasks, setTasks] = useState();
     changeState();
-
 
     useEffect(() => {
         async function getTests() {
@@ -27,7 +28,7 @@ export default function TaskPage({changeState}) {
     
     return tasks ? (
         <Container>
-            <Button onClick={() => {}}>Adicionar tarefa</Button>
+            <Button onClick={() => navigate('/task/create')}>Adicionar tarefa</Button>
             <Tasks>
                 {tasks.length === 0 ? 
                     <p>Não há provas a serem exibidas!</p>

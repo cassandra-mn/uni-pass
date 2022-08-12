@@ -16,6 +16,7 @@ import StorageContext from '../contexts/StorageContext.js';
 import TestPage from './Test/TestPage.js';
 import CreateTest from './Test/CreateTest.js';
 import TaskPage from './Task/TaskPage.js';
+import CreateTask from './Task/CreateTask.js';
 
 export default function App() {
     const URL = 'http://localhost:5000';
@@ -45,6 +46,7 @@ export default function App() {
                     <Route path='/test' element={<TestPage changeState={changeStateVisible} />} />
                     <Route path='/test/create' element={<CreateTest />} />
                     <Route path='/task' element={<TaskPage changeState={changeStateVisible} />} />
+                    <Route path='/task/create' element={<CreateTask />} />
                 </Routes>
             </BrowserRouter>
         </StorageContext.Provider>

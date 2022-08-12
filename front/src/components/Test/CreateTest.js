@@ -51,7 +51,7 @@ export default function CreateTest() {
                         return <Option key={id} value={discipline.id}>{discipline.discipline}</Option>
                     })} 
                 </Select>
-                <Button type='submit'>Cadastrar Disciplina</Button>
+                <Button type='submit'>Cadastrar Prova</Button>
             </Form>
         </Container>
     ) : <>Loading</>;
