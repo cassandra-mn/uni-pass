@@ -26,7 +26,7 @@ export default function TaskPage({changeState}) {
                     <Input placeholder={task.finalDate} type='date' required value={task.finalDate} onChange={e => setTask({...task, finalDate: e.target.value})}/>
                     <Button type='submit'>Salvar alterações</Button>
                 </Form>
-                <Button onClick={() => {}}>Deletar</Button>
+                <Button onClick={() => exclude(task.id)}>Deletar</Button>
             </Modal>
         </Popup>
     );
@@ -52,6 +52,18 @@ export default function TaskPage({changeState}) {
             window.location.reload();
         } catch(e) {
             alert(e.response.data);
+        }
+    }
+
+    async function exclude(id) {
+        const confirm = window.confirm('Tem certeza que deseja deletar?');
+        if (confirm) {
+            try {
+                await axios.delete(`${URL}/task/delete/${id}`, headers);
+                window.location.reload();
+            } catch(e) {
+                alert(e.response.data);
+            }
         }
     }
     
