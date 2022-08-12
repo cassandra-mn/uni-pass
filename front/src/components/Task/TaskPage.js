@@ -32,7 +32,7 @@ export default function TaskPage({changeState}) {
     );
 
     useEffect(() => {
-        async function getTests() {
+        async function getTasks() {
             try {
                 const {data} = await axios.get(`${URL}/tasks`, headers);
                 setTasks(data);
@@ -41,7 +41,7 @@ export default function TaskPage({changeState}) {
             }
         }
 
-        getTests();
+        getTasks();
     }, [URL, headers]);
 
     async function update(e) {
