@@ -22,13 +22,13 @@ export async function updateTask(req: Request, res: Response) {
     const {id} = req.params;
     const task = req.body;
 
-    //await taskService.updateTest(+id, task);
-    //res.sendStatus(200);
+    await taskService.updateTask(+id, task);
+    res.sendStatus(200);
 }
 
 export async function deleteTask(req: Request, res: Response) {
     const {id} = req.params;
 
-    //await taskService.deleteTest(+id);
-    //res.sendStatus(200);
+    await taskService.deleteTask(+id);
+    res.sendStatus(200);
 }

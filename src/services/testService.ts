@@ -28,13 +28,13 @@ export async function findTests(userId: number) {
 }
 
 export async function updateTest(id: number, test: CreateTest) {
-    validateTest(id);
+    await validateTest(id);
 
     await testRepository.updateTest(id, test);
 }
 
 export async function deleteTest(id: number) {
-    validateTest(id);
+    await validateTest(id);
     
     await testRepository.deleteTest(id);
 }

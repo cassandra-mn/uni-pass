@@ -26,3 +26,20 @@ export async function findTasks(userId: number) {
     }
     return allTasks.sort((i, j) => i.date - j.date);
 }
+
+export async function updateTask(id: number, task: CreateTask) {
+    await validateTask(id);
+
+    await taskRepository.updateTask(id, task);
+}
+
+export async function deleteTask(id: number) {
+    await validateTask(id);
+    
+    await taskRepository.deleteTask(id);
+}
+
+export async function validateTask(id: number) {
+    const validateTask = await taskRepository.findTaskById(id);
+    if (!validateTask) throw {type: 'not_found', message: 'tarefa não encontrada'};
+}

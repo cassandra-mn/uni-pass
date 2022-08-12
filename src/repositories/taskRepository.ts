@@ -30,3 +30,11 @@ export async function findTasks(userId: number) {
         }
     });
 }
+
+export async function updateTask(id: number, task: CreateTask) {
+    await prisma.task.updateMany({where: {id}, data: {task: task.task, finalDate: new Date(task.finalDate)}});
+}
+
+export async function deleteTask(id: number) {
+    await prisma.task.delete({where: {id}});
+}
