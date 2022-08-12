@@ -21,7 +21,7 @@ export default function CreateTest() {
         async function getDisciplines() {
             try {
                 const {data} = await axios.get(`${URL}/disciplines`, headers);
-                setDisciplines([...disciplines, ...data]);
+                setDisciplines(disciplines => [...disciplines, ...data]);
             } catch(e) {
                 alert(e.response.data);    
             }
