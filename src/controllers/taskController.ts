@@ -14,8 +14,8 @@ export async function createTask(req: Request, res: Response) {
 export async function findTask(req: Request, res: Response) {
     const {userId} = res.locals;
 
-    //const tasks = await taskService.findTests(userId);
-    //res.status(200).send(tasks);
+    const tasks = await taskService.findTasks(userId);
+    res.status(200).send(tasks);
 }
 
 export async function updateTask(req: Request, res: Response) {

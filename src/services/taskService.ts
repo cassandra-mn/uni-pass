@@ -14,3 +14,15 @@ export async function createTest(userId: number, disciplineId: number, task: Cre
 
     await taskRepository.createTask(disciplineUser.id, task);
 }
+
+export async function findTasks(userId: number) {
+    const tasks = await taskRepository.findTasks(userId);
+    const allTasks = [];
+    for (let task of tasks) {
+        const {tasks, discipline} = task;
+        if (tasks.length !== 0) {
+            tasks.forEach(task => allTasks.push({id: task.id, ...task, ...discipline}));
+        }
+    }
+    return allTasks.sort((i, j) => i.date - j.date);
+}
