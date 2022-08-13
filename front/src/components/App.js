@@ -18,6 +18,7 @@ import CreateTest from './Test/CreateTest.js';
 import TaskPage from './Task/TaskPage.js';
 import CreateTask from './Task/CreateTask.js';
 import CalendarView from './Calendar/CalendarView.js';
+import Timetable from './Timetable/TimetablePage.js';
 
 export default function App() {
     const URL = 'http://localhost:5000';
@@ -49,6 +50,7 @@ export default function App() {
                     <Route path='/task' element={<TaskPage changeState={changeStateVisible} />} />
                     <Route path='/task/create' element={<CreateTask />} />
                     <Route path='/calendar' element={<CalendarView changeState={changeStateVisible} />} />
+                    <Route path='/timetable' element={<Timetable changeState={changeStateVisible} />} />
                 </Routes>
             </BrowserRouter>
         </StorageContext.Provider>

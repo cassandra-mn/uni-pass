@@ -12,6 +12,7 @@ export default function HomePage({changeState}) {
             <Button onClick={() => navigate('/test')}>Provas</Button>
             <Button onClick={() => navigate('/task')}>Tarefas</Button>
             <Button onClick={() => navigate('/calendar')}>Calendário</Button>
+            <Button onClick={() => navigate('/timetable')}>Horário</Button>
         </Container>
     );
 }

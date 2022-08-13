@@ -54,23 +54,13 @@ model DisciplineUser {
 
 model Timetable {
   id                Int         @id @default(autoincrement())
-  day               Days
-  startTime         DateTime
-  finalTime         DateTime
+  value             String
+  startTime         String
+  finalTime         String
   disciplineUserId  Int
   disciplineUser    DisciplineUser  @relation(fields: [disciplineUserId], references: [id])
 
   @@map("timetables")
-}
-
-enum Days {
-  sunday
-  monday
-  tuesday
-  wednesday
-  thursday
-  friday
-  saturday
 }
 
 model Task {
