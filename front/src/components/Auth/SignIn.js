@@ -8,6 +8,7 @@ import StorageContext from '../../contexts/StorageContext.js';
 export default function SignUp({changeState}) {
     const navigate = useNavigate();
     const {URL} = useContext(StorageContext);
+    const [disable, setDisable] = useState(false);
     const [data, setData] = useState({
         email: '',
         password: ''
@@ -18,13 +19,14 @@ export default function SignUp({changeState}) {
 
     async function login(e) {
         e.preventDefault();
-
+        setDisable(true);
         try {
             const response = await axios.post(`${URL}/sign-in`, data);
             const serializedData = JSON.stringify(response.data);
             localStorage.setItem('data', serializedData);
             navigate('/home');
         } catch(e) {
+            setDisable(false);
             alert(e.response.data);
         }
     }
@@ -57,7 +59,10 @@ export default function SignUp({changeState}) {
             <Form onSubmit={login}>
                 <Input placeholder='e-mail' type='email' required value={data.email} onChange={e => setData({...data, email: e.target.value})}/>
                 <Input placeholder='senha' type='password' required value={data.password} onChange={e => setData({...data, password: e.target.value})}/>
-                <Button type='submit'>Entrar</Button>
+                {disable ?
+                    <ButtonDisable>Entrar</ButtonDisable>
+                    : <Button type='submit'>Entrar</Button>
+                }
                 <MoreOptions onClick={() => navigate('/sign-up')}>Ainda não tem uma conta? Cadastre-se</MoreOptions>
             </Form>
         </Container>
