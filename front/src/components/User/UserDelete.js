@@ -24,6 +24,7 @@ export default function UserDelete() {
 
     return (
         <Container>
+            <p>Depois de excluir sua conta, não há como voltar atrás. Por favor, tenha certeza.</p>
             <Form onSubmit={exclude}>
                 <Label>Digite sua senha</Label>
                 <Input type='password' required value={password} onChange={e => setPassword(e.target.value)}/>

@@ -23,7 +23,7 @@
     --shadow: 'black';
     --overlay: var(--blackA12);
   }
-  
+
 * {
     box-sizing: border-box;
 
@@ -32,4 +32,5 @@
     --font-passion: 'Passion One', sans-serif;
 
     --color-back: var(--gray);
+    --color-delete: #9e0d0d;
 }
