@@ -92,7 +92,6 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
-    height: 100px;
     height: 80px;
     padding: 15px;
     margin-bottom: 12px;
