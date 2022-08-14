@@ -11,3 +11,15 @@ export async function createTimetable(userId: number, disciplineId: number, time
 
     await timetableRepository.createTimetable(disciplineUser.id, timetable);
 }
+
+export async function findTimetables(userId: number) {
+    const timetables = await timetableRepository.findTimetables(userId);
+    const timetablesFormated = [];
+    for (let timetable of timetables) {
+        const {timetables, discipline} = timetable;
+        if (timetables.length > 0) {
+            timetables.forEach(timetable => timetablesFormated.push({...timetable, ...discipline}));
+        }
+    }
+    return timetablesFormated;
+}

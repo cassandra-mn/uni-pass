@@ -10,3 +10,10 @@ export async function createTimetable(req: Request, res: Response) {
     await timetableService.createTimetable(userId, +disciplineId, timetable);
     res.sendStatus(201);
 }
+
+export async function findTimetables(req: Request, res: Response) {
+    const {userId} = res.locals;
+
+    const timetables = await timetableService.findTimetables(userId);
+    res.status(200).send(timetables);
+}

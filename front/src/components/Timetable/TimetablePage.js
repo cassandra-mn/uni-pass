@@ -30,13 +30,26 @@ export default function Timetable({changeState}) {
             }
         }
 
+        async function getEvents() {
+            try {
+                const {data} = await axios.get(`${URL}/timetables`, headers);
+                const timetables = data.map(timetable => {
+                    return {...timetable, start: moment(timetable.start), end: moment(timetable.end)};
+                });
+                setEvents(timetables);
+            } catch(e) {
+                alert(e.response.data);    
+            }
+        }
+
         getDisciplines();
+        getEvents();
     }, [URL, headers]);
     
     function postEvents(start, end) {
         try {
-            axios.post(`${URL}/timetable/create/${event.disciplineId}`, {value: event.value, startTime: start._d, finalTime: end._d}, headers);
-            alert('ok');
+            axios.post(`${URL}/timetable/create/${event.disciplineId}`, {value: event.value, start, end}, headers);
+            alert('Horário cadastrado');
             window.location.reload();
         } catch(e) {
             alert(e.response.data);
@@ -61,19 +74,34 @@ export default function Timetable({changeState}) {
         );
     }
 
-    return (
+    function EventView(props) {
+        const {start, end, value} = props;
+        const event = events.find(e => start === e.start && end === e.end && value === e.value);
+        
+        return (
+            <Event background={event.color}>
+                <p>{`${start.format('HH:mm')} - ${end.format('HH:mm')}`}</p><br/>
+                <p>{value}</p><br/>
+                <p>{event.clasroom}</p>
+            </Event>
+        );
+    }
+
+    return events ? (
         <Container>
             <WeekCalendar  
                 scaleUnit={60}
-                cellHeight={50}
+                eventSpacing={10}
+                cellHeight={100}
                 firstDay={moment().day(0)}
                 headerCellComponent={HeaderCell}
                 selectedIntervals = {events}
                 onIntervalSelect={postEvents}
+                eventComponent={EventView}
                 modalComponent={Modal}
             />
         </Container>
-    );
+    ) : <>Loading</>;
 }
 
 function HeaderCell({date}) {
@@ -82,12 +110,49 @@ function HeaderCell({date}) {
 }
 
 const Container = styled.div`
+    width: 100vw;
+    height: 100%;
+    border-bottom: 50px;
+    --calendar-max-height: 100%;
+    --column-min-width: 60px;
+    --padding-left: 60px;
 
-    .event {
-        background: #2e78d6 ;
-        color: #fff ;
-        border-radius: 5px ;
-        font-size: 10pt ;
-        opacity: 0,8 ;
+    .weekCalendar {
+        overflow: hidden;
+        padding-left: var(--padding-left);
     }
+
+    .weekCalendar__header {
+        padding-left: var(--padding-left);
+    }
+
+    .weekCalendar__content {
+        max-height: var(--calendar-max-height);
+    }
+
+    .calendarBody__column {
+        min-width: var(--column-min-width);
+    }
+
+    .weekCalendar__scaleColumn {
+        width: 60px;
+    }
+
+    .weekCalendar__scaleHeader {
+        width: 60px;
+    }
+`;
+
+const Event = styled.div`
+    width: 100%;
+    height: 100%;
+    opacity: 0,8;
+    font-size: 10pt;
+    border-radius: 5px;
+    overflow: hidden;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: ${props => props.background};
 `;

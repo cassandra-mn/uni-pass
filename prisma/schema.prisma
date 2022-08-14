@@ -55,8 +55,8 @@ model DisciplineUser {
 model Timetable {
   id                Int         @id @default(autoincrement())
   value             String
-  startTime         String
-  finalTime         String
+  start             String
+  end               String
   disciplineUserId  Int
   disciplineUser    DisciplineUser  @relation(fields: [disciplineUserId], references: [id])
 
