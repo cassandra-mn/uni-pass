@@ -31,6 +31,6 @@
     --font-osvald: 'Oswald', sans-serif;
     --font-passion: 'Passion One', sans-serif;
 
-    --color-back: var(--gray);
     --color-delete: #9e0d0d;
+    --color-list: #0d253d;    
 }
