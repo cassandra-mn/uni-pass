@@ -1,7 +1,8 @@
 import {useContext, useEffect, useState} from 'react';
 import {Link, useNavigate, useParams} from 'react-router-dom';
-import axios from 'axios';
 import styled from 'styled-components';
+import axios from 'axios';
+import dayjs from 'dayjs';
 
 import StorageContext from '../../contexts/StorageContext.js';
 
@@ -45,12 +46,21 @@ export default function DisciplineById() {
                 </Infos>
                 <Tests>
                     <h1>Provas</h1>
+                    {discipline.tests.map(test => {
+                        return <p key={test.id}>{test.test} - {dayjs(test.date).format('DD/MM')}</p>
+                    })}
                 </Tests>
                 <Tasks>
                     <h1>Tarefas</h1>
+                    {discipline.tasks.map(task => {
+                        return <p key={task.id}>{task.task} - {dayjs(task.finalDate).format('DD/MM')}</p>
+                    })}
                 </Tasks>
                 <Timetable>
                     <h1>Horário</h1>
+                    {discipline.timetables.map(timetable => {
+                        return <p key={timetable.id}>{dayjs(timetable.start).format('HH:mm')} - {dayjs(timetable.end).format('HH:mm')}</p>
+                    })}
                 </Timetable>
             </Discipline>
         </Container>

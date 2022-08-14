@@ -17,7 +17,22 @@ export async function findDisciplines(userId: number) {
 }
 
 export async function findDisciplineById(id: number, userId: number) {
-    return await validateDiscipline(id, userId);
+    const discipline = await validateDiscipline(id, userId);
+    let disciplineFormated = {
+        id: discipline.id,
+        discipline: discipline.discipline,
+        teacher: discipline.teacher,
+        clasroom: discipline.clasroom,
+        color: discipline.color,
+        userId: discipline.userId,
+        tests: [],
+        tasks: [],
+        timetables: []
+    };
+    for (let element of discipline.disciplinesUsers) {
+        disciplineFormated = {...disciplineFormated, tests: element.tests, tasks: element.tasks, timetables: element.timetables};
+    }
+    return disciplineFormated;
 }
 
 export async function updateDiscipline(id: number, userId: number, disciplineData: CreateDiscipline) {

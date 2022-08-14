@@ -15,7 +15,18 @@ export async function findDisciplines(userId: number) {
 }
 
 export async function findDisciplineById(id: number, userId: number) {
-    return await prisma.discipline.findFirst({where: {id, userId}});
+    return await prisma.discipline.findUnique({
+        where: {id},
+        include: {
+            disciplinesUsers: {
+                select: {
+                    tests: {},
+                    tasks: {},
+                    timetables: {}
+                }
+            }
+        }
+    });
 }
 
 export async function updateDiscipline(id: number, userId: number, discipline: CreateDiscipline) {

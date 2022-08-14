@@ -3,8 +3,6 @@ import {useContext, useEffect, useState} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import Box from '@mui/material/Box';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 
@@ -28,18 +26,6 @@ export default function DisciplinePage({changeState}) {
 
         getDisciplines();
     }, [URL, headers]);
-
-    async function exclude(id) {
-        const confirm = window.confirm('Tem certeza que deseja deletar a disciplina?');
-        if (confirm) {
-            try {
-                await axios.delete(`${URL}/discipline/delete/${id}`, headers);
-                navigate('/discipline');
-            } catch(e) {
-                alert(e.response.data);
-            }
-        }
-    }
 
     return disciplines ? (
         <Container>
