@@ -49,7 +49,18 @@ export default function Timetable({changeState}) {
     function postEvents(start, end) {
         try {
             axios.post(`${URL}/timetable/create/${event.disciplineId}`, {value: event.value, start, end}, headers);
-            alert('Horário cadastrado');
+            alert('Horário cadastrado!');
+            window.location.reload();
+        } catch(e) {
+            alert(e.response.data);
+        }
+    }
+
+    async function exclude(start, end) {
+        const event = events.find(e => e.start === start && e.end === end);
+        try {
+            await axios.delete(`${URL}/timetable/delete/${event.id}`, headers); 
+            alert('Horário deletado!');
             window.location.reload();
         } catch(e) {
             alert(e.response.data);
@@ -70,6 +81,7 @@ export default function Timetable({changeState}) {
                 </select>
               <button onClick={() => window.location.reload()}>Voltar</button>
               <button onClick={() => postEvents(start, end)}>Salvar</button>
+              <button onClick={() => exclude(start, end)}>Deletar</button>
             </div>
         );
     }

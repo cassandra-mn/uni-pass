@@ -23,3 +23,7 @@ export async function findTimetables(userId: number) {
     }
     return timetablesFormated;
 }
+
+export async function deleteTimetable(id: number) {
+    await timetableRepository.deleteTimetable(id); 
+}

@@ -21,3 +21,7 @@ export async function findTimetables(userId: number) {
         }
     })
 }
+
+export async function deleteTimetable(id: number) {
+    await prisma.timetable.delete({where: {id}});
+}

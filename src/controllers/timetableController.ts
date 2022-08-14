@@ -17,3 +17,10 @@ export async function findTimetables(req: Request, res: Response) {
     const timetables = await timetableService.findTimetables(userId);
     res.status(200).send(timetables);
 }
+
+export async function deleteTimetable(req: Request, res: Response) {
+    const {id} = req.params;
+
+    await timetableService.deleteTimetable(+id);
+    res.sendStatus(200);
+}
