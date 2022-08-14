@@ -1,7 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Oswald:wght@400;700&family=Passion+One:wght@400;700&display=swap');
 
+@import "@radix-ui/colors/gray.css";
+@import "@radix-ui/colors/blue.css";
+@import "@radix-ui/colors/green.css";
+@import "@radix-ui/colors/red.css";
+@import "@radix-ui/colors/grayDark.css";
+@import "@radix-ui/colors/blueDark.css";
+@import "@radix-ui/colors/greenDark.css";
+@import "@radix-ui/colors/redDark.css";
+
+:root {
+    --panel: white;
+    --panelContrast: var(--blackA11);
+    --shadow: var(--slateA3);
+    --overlay: var(--blackA8);
+  }
+  
+  .dark-theme {
+    /* Remap your colors for dark mode */
+    --panel: var(--slate2);
+    --panelContrast: var(--whiteA11);
+    --shadow: 'black';
+    --overlay: var(--blackA12);
+  }
+  
 * {
     box-sizing: border-box;
+
     --font-lato: 'Lato', sans-serif;
     --font-osvald: 'Oswald', sans-serif;
+    --font-passion: 'Passion One', sans-serif;
+
+    --color-back: var(--gray);
 }

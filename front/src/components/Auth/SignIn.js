@@ -2,6 +2,11 @@ import {useContext, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 import StorageContext from '../../contexts/StorageContext.js';
 
@@ -9,6 +14,7 @@ export default function SignUp({changeState}) {
     const navigate = useNavigate();
     const {URL} = useContext(StorageContext);
     const [disable, setDisable] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const [data, setData] = useState({
         email: '',
         password: ''
@@ -58,7 +64,27 @@ export default function SignUp({changeState}) {
             </Text>
             <Form onSubmit={login}>
                 <Input placeholder='e-mail' type='email' required value={data.email} onChange={e => setData({...data, email: e.target.value})}/>
-                <Input placeholder='senha' type='password' required value={data.password} onChange={e => setData({...data, password: e.target.value})}/>
+                <OutlinedInput
+                    required
+                    placeholder='senha'
+                    className='password'
+                    id="outlined-adornment-password"
+                    type={showPassword ? 'text' : 'password'}
+                    value={data.password}
+                    onChange={e => setData({...data, password: e.target.value})}
+                    endAdornment={
+                    <InputAdornment position="end">
+                        <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={() => setShowPassword(!showPassword)}
+                            onMouseDown={(e) => e.preventDefault()}
+                            edge="end"
+                        >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                    </InputAdornment>
+                    }
+                />
                 {disable ?
                     <ButtonDisable>Entrar</ButtonDisable>
                     : <Button type='submit'>Entrar</Button>
@@ -78,6 +104,27 @@ const Container = styled.div`
     
     @media (max-width: 700px) {
         justify-content: center;
+    }
+
+    .password {
+        width: 70%;
+        height: 8%;
+        margin-bottom: 12px;
+        font-size: 27px;
+        font-weight: 700;
+        line-height: 40px;
+        border-radius: 6px; 
+        color: #333333;
+        background: #FFFFFF;
+        font-family: var(--font-osvald);
+
+        ::placeholder {
+            color: #9F9F9F;
+        }
+
+        @media (max-width: 700px) {
+            height: 15%;
+        }
     }
 `;
 
@@ -222,7 +269,7 @@ const Button = styled.button`
     }
 
     @media (max-width: 700px) {
-        height: 11%;
+        height: 14%;
     }
 `;
 

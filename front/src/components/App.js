@@ -5,7 +5,6 @@ import Back from './Button/Back.js';
 import SignUp from './Auth/SignUp.js';
 import SignIn from './Auth/SignIn.js';
 import HomePage from './Home/HomePage.js';
-import UserPage from './User/UserPage.js';
 import UserUpdate from './User/UserUpdate.js';
 import UserDelete from './User/UserDelete.js';
 import DisciplinePage from './Discipline/DisciplinePage.js';
@@ -38,8 +37,7 @@ export default function App() {
                     <Route path='/sign-up' element={<SignUp changeState={changeStateNotVisible} />} />
                     <Route path='/sign-in' element={<SignIn changeState={changeStateNotVisible} />} />
                     <Route path='/home' element={<HomePage changeState={changeStateNotVisible} />} />
-                    <Route path='/user' element={<UserPage changeState={changeStateVisible} />} />
-                    <Route path='/user/update' element={<UserUpdate />} />
+                    <Route path='/user/update' element={<UserUpdate changeState={changeStateVisible} />} />
                     <Route path='/user/delete' element={<UserDelete />} />
                     <Route path='/discipline' element={<DisciplinePage changeState={changeStateVisible} />} />
                     <Route path='/discipline/:id' element={<DisciplineById />} />
