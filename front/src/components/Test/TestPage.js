@@ -122,10 +122,12 @@ const Container = styled.div`
 const Tests = styled.div`
     margin-top: 30px;
     display: flex;
+    align-items: center;
     flex-direction: column;
 `;
 
 const Test = styled.div`
+    width: 100%;
     margin: 5px;
     padding: 15px;
     border: 1px  black solid;
