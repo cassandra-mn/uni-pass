@@ -6,9 +6,9 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/src/server.js",
     "dev": "nodemon src/server.ts",
-    "dev:test": "dotenv -e .env.test nodemon src/server.ts"
+    "prisma:migrate": "npx prisma migrate dev",
+    "start": "npm run build && npm run prisma:migrate && node dist/server.js"
   },
   "keywords": [],
   "author": "",
