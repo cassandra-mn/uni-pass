@@ -51,32 +51,76 @@ export default function CreateTask() {
                         return <Option key={id} value={discipline.id}>{discipline.discipline}</Option>
                     })} 
                 </Select>
-                <Button type='submit'>Cadastrar Tarefa</Button>
+                <Button className='submit' type='submit'>Cadastrar Tarefa</Button>
             </Form>
         </Container>
     ) : <>Loading</>;
 }
 
 const Container = styled.div`
+    width: 100vw;
+    height: 100vh;
+    padding: 40px;
+    margin-top: 40px;
 
+    .block {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .submit {
+        margin-top: 50px;
+        color: #FFFFFF;
+        background: #1877F2;
+    }
 `;
 
 const Form = styled.form`
-
+    display: flex;
+    flex-direction: column;
 `;
 
 const Input = styled.input`
+    height: 70px;
+    padding: 15px;
+    margin-bottom: 12px;
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 40px;
+    border-radius: 10px; 
+    color: #333333;
+    background: #FFFFFF;
+    font-family: var(--font-osvald);
 
-`;
-
-const Select = styled.select`
-
-`;
-
-const Option = styled.option`
-
+    ::placeholder {
+        color: #9F9F9F;
+    }
 `;
 
 const Button = styled.button`
+    height: 70px;
+    font-size: 27px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: transparent;
+    font-family: var(--font-osvald);
 
+    :hover {
+        cursor: pointer;
+    }
+`;
+
+const Select = styled.select`
+    height: 70px;
+    font-size: 27px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: 2px solid black;
+    background-color: transparent;
+    font-family: var(--font-osvald);
+`;
+
+const Option = styled.option`
+    border-radius: 50%;
+    font-family: var(--font-osvald);
 `;
