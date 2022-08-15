@@ -67,22 +67,24 @@ export default function Timetable({changeState}) {
         }
     }
 
-    function Modal({start, end}) {
+    function ModalView({start, end}) {
         return (
-            <div>
+            <Modal>
+                <Close className='close' onClick={() => window.location.reload()}>X</Close>
                 <div>
                     <span>{`${start.format('HH:mm')} - ${end.format('HH:mm')}`}</span>
                 </div>
-                <input placeholder="Descrição" type='text' required value={event.value} onChange={e => setEvent({...event, value: e.target.value})}/>
-                <select required value={event.disciplineId} onChange={e => setEvent({...event, disciplineId: e.target.value})}>
+                <Form>
+                <Input placeholder="Descrição" type='text' required value={event.value} onChange={e => setEvent({...event, value: e.target.value})}/>
+                <Select required value={event.disciplineId} onChange={e => setEvent({...event, disciplineId: e.target.value})}>
                     {disciplines.map((discipline, id) => {
                         return <option key={id} value={discipline.id}>{discipline.discipline}</option>
                     })} 
-                </select>
-              <button onClick={() => window.location.reload()}>Voltar</button>
-              <button onClick={() => postEvents(start, end)}>Salvar</button>
-              <button onClick={() => exclude(start, end)}>Deletar</button>
-            </div>
+                </Select>
+                <Button type='submit' onClick={() => postEvents(start, end)}>Salvar</Button>
+                </Form>
+              <Button className='delete' onClick={() => exclude(start, end)}>Deletar</Button>
+            </Modal>
         );
     }
 
@@ -103,14 +105,14 @@ export default function Timetable({changeState}) {
         <Container>
             <WeekCalendar  
                 scaleUnit={60}
-                eventSpacing={10}
+                eventSpacing={0}
                 cellHeight={100}
                 firstDay={moment().day(0)}
                 headerCellComponent={HeaderCell}
                 selectedIntervals = {events}
                 onIntervalSelect={postEvents}
                 eventComponent={EventView}
-                modalComponent={Modal}
+                modalComponent={ModalView}
             />
         </Container>
     ) : <>Loading</>;
@@ -123,11 +125,14 @@ function HeaderCell({date}) {
 
 const Container = styled.div`
     width: 100vw;
-    height: 100%;
-    border-bottom: 50px;
+    height: 100vh;
+    padding: 50px 40px;
+    margin-top: 20px;
+    font-family: var(--font-osvald);
     --calendar-max-height: 100%;
     --column-min-width: 60px;
     --padding-left: 60px;
+
 
     .weekCalendar {
         overflow: hidden;
@@ -153,12 +158,22 @@ const Container = styled.div`
     .weekCalendar__scaleHeader {
         width: 60px;
     }
+
+    .delete {
+        margin-top: 50px;
+        color: #FFFFFF;
+        background: var(--color-delete);
+    }
+
+    span {
+        font-size: 20px;
+    }
 `;
 
 const Event = styled.div`
     width: 100%;
     height: 100%;
-    opacity: 0,8;
+    padding: 5px;
     font-size: 10pt;
     border-radius: 5px;
     overflow: hidden;
@@ -167,4 +182,67 @@ const Event = styled.div`
     flex-direction: column;
     justify-content: space-between;
     background: ${props => props.background};
+`;
+
+const Modal = styled.div`
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFFFF;
+`;
+
+const Button = styled.button`
+    height: 50px;
+    font-size: 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+    background-color: transparent;
+    background: #3087fa;
+    font-family: var(--font-osvald);
+`;
+
+const Close = styled.a`
+    top: 20px;
+    right: 50px;
+    font-size: 27px;
+    position: absolute;
+
+    :hover {
+        cursor: pointer;
+    }
+`;
+
+const Form = styled.form`
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+`;
+
+const Input = styled.input`
+    height: 50px;
+    margin: 10px 0;
+    padding: 15px;
+    font-size: 20px;
+    line-height: 40px;
+    border-radius: 10px; 
+    color: #333333;
+    background: #FFFFFF;
+    font-family: var(--font-osvald);
+
+    ::placeholder {
+        color: #9F9F9F;
+    }
+`;
+
+const Select = styled.select`
+    height: 50px;
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 20px;
+    line-height: 40px;
+    border-radius: 10px; 
+    color: #333333;
+    background: #FFFFFF;
+    font-family: var(--font-osvald);
 `;
