@@ -5,9 +5,9 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "npx tsc",
     "dev": "nodemon src/server.ts",
-    "prisma:migrate": "npx prisma migrate dev",
+    "prisma:migrate": "npx prisma migrate deploy",
     "start": "npm run build && npm run prisma:migrate && node dist/server.js"
   },
   "keywords": [],
