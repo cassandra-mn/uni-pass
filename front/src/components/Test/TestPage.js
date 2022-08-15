@@ -5,11 +5,14 @@ import Popup from 'reactjs-popup';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Box from '@mui/material/Box';
+import SpeedDial from '@mui/material/SpeedDial';
+import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 
 import StorageContext from '../../contexts/StorageContext.js';
 
 export default function TestPage({changeState}) {
-    const navigate = useNavigate();
     const {headers, URL} = useContext(StorageContext);
     const [tests, setTests] = useState();
     const [test, setTest] = useState({});
@@ -69,48 +72,90 @@ export default function TestPage({changeState}) {
     
     return tests ? (
         <Container>
-            <Button onClick={() => navigate('/test/create')}>Adicionar prova</Button>
             <Tests>
                 {tests.length === 0 ? 
                     <p>Não há provas a serem exibidas!</p>
                     : (tests.map(test => {
                         return (
                             <Test key={test.id} onClick={() => setOpen(true) & setTest(test)}>
-                                <p>{test.test}</p>
-                                <p><AiFillCalendar /> {dayjs(test.date).add(1, 'day').format('DD/MM/YYYY')}</p>
-                                <p className='flex'>
-                                    <Color background={test.color}></Color>
-                                    <small>{test.discipline}</small>
-                                </p>
+                                <div>
+                                    <h1>{test.test}</h1>
+                                    <p><AiFillCalendar /> {dayjs(test.date).add(1, 'day').format('DD/MM/YYYY')}</p>
+                                    <div className='flex'>
+                                        <Color background={test.color}></Color>
+                                        <small>{test.discipline}</small>
+                                    </div>
+                                </div>
+                                <DeleteIcon color='error' />
                             </Test>
                         ); 
                     }))
                 }
                 <Update test={test} />
             </Tests>
+            <BasicSpeedDial />
         </Container>
     ) : <>Loading</>;
 }
 
+function BasicSpeedDial() {
+    const navigate = useNavigate();
+    
+    return (
+        <Box onClick={() => navigate('/test/create')}>
+            <SpeedDial
+                ariaLabel='SpeedDial basic example'
+                sx={{position: 'absolute', bottom: 40, right: 40}}
+                icon={<SpeedDialIcon />}
+            >
+            </SpeedDial>
+        </Box>
+    );
+}
+
 const Container = styled.div`
-
-`;
-
-const Button = styled.button`
-
+    width: 100vw;
+    height: 100vh;
+    padding: 50px 35px;
+    font-family: var(--font-osvald);
 `;
 
 const Tests = styled.div`
-
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
 `;
 
 const Test = styled.div`
-    margin: 1px;
+    margin: 5px;
+    padding: 15px;
     border: 1px  black solid;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
 
     .flex {
         display: flex;
         align-items: center;
+    }
+
+    h1 {
+        font-weight: 600;
+        font-size: 22px;
+        margin-bottom: 10x;
+    }
+    
+    p {
+        font-size: 18px;
+        margin: 10px 0;
+        color: #313131;
+    }
+
+    small {
+        margin-left: 5px;
+        font-size: 18px;
+        color: #313131;
     }
 
     :hover {
@@ -126,6 +171,10 @@ const Color = styled.div`
 `;
 
 const Modal = styled.div`
+
+`;
+
+const Button = styled.button`
 
 `;
 
