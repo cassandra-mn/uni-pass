@@ -38,7 +38,7 @@ export async function findDisciplineById(id: number, userId: number) {
 export async function updateDiscipline(id: number, userId: number, disciplineData: CreateDiscipline) {
     await validateDiscipline(id, userId);
 
-    await disciplineRepository.updateDiscipline(id, userId, disciplineData);
+    await disciplineRepository.updateDiscipline(id, disciplineData);
 }
 
 export async function deleteDiscipline(id: number, userId: number) {

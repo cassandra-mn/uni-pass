@@ -29,8 +29,8 @@ export async function findDisciplineById(id: number, userId: number) {
     });
 }
 
-export async function updateDiscipline(id: number, userId: number, discipline: CreateDiscipline) {
-    await prisma.discipline.updateMany({where: {id, userId}, data: discipline});
+export async function updateDiscipline(id: number, discipline: CreateDiscipline) {
+    await prisma.discipline.update({where: {id}, data: {discipline: discipline.discipline, teacher: discipline.teacher, clasroom: discipline.clasroom}});
 }
 
 export async function deleteDiscipline(id: number) {
