@@ -20,7 +20,7 @@ import CalendarView from './Calendar/CalendarView.js';
 import Timetable from './Timetable/TimetablePage.js';
 
 export default function App() {
-    const URL = 'http://localhost:5000';
+    const URL = 'https://projeto-unipass.herokuapp.com';
     const data = localStorage.getItem("data");
     const locals = data ? JSON.parse(data) : '';
     const headers = locals ? {headers: {Authorization: `Bearer ${locals.token}`}} : '';
