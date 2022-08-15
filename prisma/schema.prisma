@@ -23,19 +23,13 @@ model Discipline {
   discipline         String
   teacher            String
   clasroom           String
-  color              Colors   
+  color              String   
   userId             Int
   user               User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   disciplinesUsers   DisciplineUser[]
 
   @@unique([discipline, userId])
   @@map("disciplines")
-}
-
-enum Colors {
-  white
-  blue
-  //acrescentar cores
 }
 
 model DisciplineUser {

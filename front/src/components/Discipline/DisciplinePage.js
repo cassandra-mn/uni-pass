@@ -68,6 +68,12 @@ const Container = styled.div`
     width: 100vw;
     height: 100vh;
     padding: 30px 50px;
+
+    p {
+        font-size: 18px;
+        text-align: center;
+        font-family: var(--font-osvald);
+    }
 `;
 
 const Title = styled.h1`
