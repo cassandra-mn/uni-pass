@@ -29,7 +29,6 @@ export default function TestPage({changeState}) {
                     <Input placeholder={test.date} type='date' required value={test.date} onChange={e => setTest({...test, date: e.target.value})}/>
                     <Button type='submit'>Salvar alterações</Button>
                 </Form>
-                <Button onClick={() => exclude(test.id)}>Deletar</Button>
             </Modal>
         </Popup>
     );
@@ -86,7 +85,7 @@ export default function TestPage({changeState}) {
                                         <small>{test.discipline}</small>
                                     </div>
                                 </div>
-                                <DeleteIcon color='error' />
+                                <DeleteIcon color='error' onClick={() => exclude(test.id)} />
                             </Test>
                         ); 
                     }))
@@ -171,21 +170,53 @@ const Color = styled.div`
 `;
 
 const Modal = styled.div`
-
+    width: 100vw;
+    height: 85vh;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFFFF;
 `;
 
 const Button = styled.button`
-
+    height: 50px;
+    font-size: 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+    background-color: transparent;
+    background: #3087fa;
+    font-family: var(--font-osvald);
 `;
 
 const Close = styled.a`
+    top: 20px;
+    right: 50px;
+    font-size: 27px;
+    position: absolute;
 
+    :hover {
+        cursor: pointer;
+    }
 `;
 
 const Form = styled.form`
-
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
 `;
 
 const Input = styled.input`
+    height: 50px;
+    margin: 10px 0;
+    padding: 15px;
+    font-size: 20px;
+    line-height: 40px;
+    border-radius: 10px; 
+    color: #333333;
+    background: #FFFFFF;
+    font-family: var(--font-osvald);
 
+    ::placeholder {
+        color: #9F9F9F;
+    }
 `;
