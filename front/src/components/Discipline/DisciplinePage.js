@@ -29,6 +29,7 @@ export default function DisciplinePage({changeState}) {
 
     return disciplines ? (
         <Container>
+            <Title>Disciplinas</Title>
             <Disciplines>
                 {disciplines.length === 0 ? 
                     <p>Não há disciplinas cadastradas!</p>
@@ -66,7 +67,13 @@ function BasicSpeedDial() {
 const Container = styled.div`
     width: 100vw;
     height: 100vh;
-    padding: 50px;
+    padding: 30px 50px;
+`;
+
+const Title = styled.h1`
+    font-size: 30px;
+    text-align: center;
+    font-family: var(--font-passion);
 `;
 
 const Disciplines = styled.div`

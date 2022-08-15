@@ -33,6 +33,6 @@ export async function updateDiscipline(id: number, userId: number, discipline: C
     await prisma.discipline.updateMany({where: {id, userId}, data: discipline});
 }
 
-export async function deleteDiscipline(id: number, userId: number) {
-    await prisma.discipline.deleteMany({where: {id, userId}});
+export async function deleteDiscipline(id: number) {
+    await prisma.discipline.delete({where: {id}});
 }

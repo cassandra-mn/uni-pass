@@ -58,7 +58,7 @@ model Timetable {
   start             String
   end               String
   disciplineUserId  Int
-  disciplineUser    DisciplineUser  @relation(fields: [disciplineUserId], references: [id])
+  disciplineUser    DisciplineUser  @relation(fields: [disciplineUserId], references: [id], onDelete: Cascade)
 
   @@map("timetables")
 }
@@ -69,7 +69,7 @@ model Task {
   startDate         DateTime    @default(now())
   finalDate         DateTime  
   disciplineUserId  Int
-  disciplineUser    DisciplineUser  @relation(fields: [disciplineUserId], references: [id])
+  disciplineUser    DisciplineUser  @relation(fields: [disciplineUserId], references: [id], onDelete: Cascade)
 
   @@unique([task, disciplineUserId])
   @@map("tasks")
@@ -80,7 +80,7 @@ model Test {
   test              String  
   date              DateTime
   disciplineUserId  Int
-  disciplineUser    DisciplineUser  @relation(fields: [disciplineUserId], references: [id])
+  disciplineUser    DisciplineUser  @relation(fields: [disciplineUserId], references: [id], onDelete: Cascade)
 
   @@unique([test, disciplineUserId])
   @@map("tests")
