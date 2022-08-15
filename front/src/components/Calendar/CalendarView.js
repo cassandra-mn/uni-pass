@@ -5,6 +5,14 @@ import {useContext, useEffect, useState} from 'react';
 import {AiFillCalendar} from 'react-icons/ai';
 import {Calendar} from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import * as React from 'react';
+import Timeline from '@mui/lab/Timeline';
+import TimelineItem from '@mui/lab/TimelineItem';
+import TimelineSeparator from '@mui/lab/TimelineSeparator';
+import TimelineConnector from '@mui/lab/TimelineConnector';
+import TimelineContent from '@mui/lab/TimelineContent';
+import TimelineDot from '@mui/lab/TimelineDot';
+import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 
 import StorageContext from '../../contexts/StorageContext';
 
@@ -14,6 +22,7 @@ export default function CalendarView({changeState}) {
     const [tasks, setTasks] = useState();
     const [visible, setVisible] = useState(false);
     const [events, setEvents] = useState([]);
+
     changeState();
 
     useEffect(() => {
@@ -70,24 +79,20 @@ export default function CalendarView({changeState}) {
 
         if (test.length !== 0 && task.length !== 0) {
             return (
-                <div className='flex'>
-                    {test.map(t => <p key={t.id} className={t.color}>.</p>)}
-                    {task.map(t => <p key={t.id} className={task[0].color}>.</p>)}
-                </div>
+                <Flex>
+                    {test.map(t => <P color={t.color} key={t.id}>.</P>)}
+                    {task.map(t => <P color={t.color} key={t.id}>.</P>)}
+                </Flex>
             );
         }
         if (test.length !== 0) {
             return (
-                <div className='flex'>
-                    {test.map(t => <p key={t.id} className={t.color}>.</p>)}
-                </div>
+                <Flex>{test.map(t => <P color={t.color} key={t.id}>.</P>)}</Flex>
             );
         }
         if (task.length !== 0) {
             return (
-                <div className='flex'>
-                    {task.map(t => <p key={t.id} className={task[0].color}>.</p>)}
-                </div>
+                <Flex>{task.map(t => <P color={t.color} key={t.id}>.</P>)}</Flex>
             );
         }
     }
@@ -106,23 +111,42 @@ export default function CalendarView({changeState}) {
                         <h1>Seus eventos </h1>
                         <p><AiFillCalendar /> {events.dayFormated}</p>
                     </div>
+                    <Timeline position="alternate">
                     {events.events.map(event => {
                         if (event.test) {
+                            console.log(event.color)
                             return (
-                                <div key={event.id} className='event'>
-                                    <p>{event.test}</p>
-                                    <p>{event.discipline}</p>
-                                </div>
+                                <TimelineItem>
+                                    <TimelineOppositeContent color="text.secondary">
+                                        <p>{event.discipline}</p>
+                                    </TimelineOppositeContent>
+                                    <TimelineSeparator>
+                                        <TimelineDot />
+                                        <TimelineConnector />
+                                    </TimelineSeparator>
+                                    <TimelineContent>
+                                        <p>{event.test}</p>
+                                    </TimelineContent>
+                                </TimelineItem>
                             ); 
                         } else {
                             return (
-                                <div key={event.id} className='event'>
-                                    <p>{event.task}</p>
-                                    <p>{event.discipline}</p>
-                                </div>
+                                <TimelineItem>
+                                    <TimelineOppositeContent color="text.secondary">
+                                        <p>{event.discipline}</p>
+                                    </TimelineOppositeContent>
+                                    <TimelineSeparator>
+                                        <TimelineDot />
+                                        <TimelineConnector />
+                                    </TimelineSeparator>
+                                    <TimelineContent>
+                                        <p>{event.task}</p>
+                                    </TimelineContent>
+                                </TimelineItem>
                             );
                         }
                     })}
+                    </Timeline>
                 </div>
             : ''
             }
@@ -131,34 +155,35 @@ export default function CalendarView({changeState}) {
 }
 
 const Container = styled.div`
-
-    .calendar {
-        
-    }
-
-    .blue {
-        font-size: 25px;
-        font-weight: 900;
-        color: blue;
-    }
-
-    .white {
-        font-size: 25px;
-        font-weight: 900;
-        color: black; //FIXME:
-    }
-
-    .flex {
-        display: flex;
-        justify-content: center;
-    }
+    width: 100vw;
+    height: 100vh;
+    padding: 50px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--font-osvald);
 
     .infos {
+        width: 70vw;
+        margin: 20px 0;
         display: flex;
         justify-content: space-between;
-    }
+        color: #313131;
 
-    .event {
-        margin: 5px;
+        h1 {
+            font-size: 20px;
+        }
     }
+`;
+
+const Flex = styled.div`
+    display: flex;
+    justify-content: center;
+`;
+
+const P = styled.p`
+    font-size: 25px;
+    font-weight: 900;
+    color: ${props => props.color};
 `;

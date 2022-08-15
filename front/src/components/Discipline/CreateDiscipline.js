@@ -4,13 +4,10 @@ import axios from 'axios';
 import styled from 'styled-components'
 import {gray, blue, red, green, pink} from '@radix-ui/colors';
 import Box from '@mui/material/Box';
-//import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-
-//import Select from '@mui/material/Select';
 
 import StorageContext from '../../contexts/StorageContext.js';
 
