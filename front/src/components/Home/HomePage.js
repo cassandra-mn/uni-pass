@@ -10,6 +10,11 @@ import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
+import {VscMortarBoard} from 'react-icons/vsc';
+import {VscCalendar} from 'react-icons/vsc';
+import {VscChecklist} from 'react-icons/vsc';
+import {VscFiles} from 'react-icons/vsc';
+import {BiTime} from 'react-icons/bi';
 
 export default function HomePage({changeState}) {
     const navigate = useNavigate();
@@ -20,11 +25,26 @@ export default function HomePage({changeState}) {
             <Title>Visão geral</Title>
             <MenuListComposition />
             <Buttons>
-                <button onClick={() => navigate('/discipline')}>Disciplinas</button>
-                <button onClick={() => navigate('/timetable')}>Horário</button>
-                <button onClick={() => navigate('/test')}>Provas</button>
-                <button onClick={() => navigate('/task')}>Tarefas</button>
-                <button onClick={() => navigate('/calendar')}>Calendário</button>
+                <div onClick={() => navigate('/discipline')}>
+                    <small><VscMortarBoard className='icons' /></small>
+                    Disciplinas
+                </div>
+                <div onClick={() => navigate('/timetable')}>
+                    <small><BiTime className='icons' /></small>
+                    Horário
+                </div>
+                <div onClick={() => navigate('/test')}>
+                    <small><VscFiles className='icons' /></small>
+                    Provas
+                </div>
+                <div onClick={() => navigate('/task')}>
+                    <small><VscChecklist className='icons' /></small>
+                    Tarefas
+                </div>
+                <div onClick={() => navigate('/calendar')}>
+                    <small><VscCalendar className='icons' /></small>
+                    Calendário
+                </div>
             </Buttons>
         </Container>
     );
@@ -117,12 +137,13 @@ function MenuListComposition() {
 }
 
 const Container = styled.div`
+    width: 100vw;
     height: 100vh;
     padding: 20px;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     background-color: var(--theme);
+    font-family: var(--font-osvald);
 
     .profile {
         top: 40px;
@@ -133,26 +154,60 @@ const Container = styled.div`
         color: black;
         position: absolute;
     }
+
+    .icons {
+        font-size: 50px;
+        margin-bottom: 10px;
+    }
 `;
 
 const Title = styled.h1`
     margin-top: 20px;
     font-size: 30px;
+    position: absolute;
     font-family: var(--font-passion);
 `;
 
 const Buttons = styled.div`
+    width: 100vw;
+    height: 50%;
+    margin: 60px 0;
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
-    margin-bottom: 30px;
 
-    button {
+    div {
         width: 120px;
         height: 120px;
-        margin: 20px;
+        margin: 10px;
+        margin-top: 20px;
+        font-size: 20px;
         border-radius: 20px;
-        border: 1px solid black;
-        box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        color: #313131;
+        border: 1px solid #313131;
+        background-color: transparent;
+
+        small {
+            width: 70px;
+            height: 70px;
+            font-size: 12px;
+            margin-bottom: 5px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            //background-color: var(--color-blue);
+        }
+
+        :hover {
+            cursor: pointer;
+            opacity: 0.5;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
     }
 `;
