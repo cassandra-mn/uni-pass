@@ -36,7 +36,7 @@ export default function CreateTest() {
         try {
             await axios.post(`${URL}/test/create/${test.disciplineId}`, {test: test.test, date: test.date}, headers);
             alert('Prova cadastrada!');
-            navigate('/test');
+            navigate(-1);
         } catch(e) {
             alert(e.response.data);
         }

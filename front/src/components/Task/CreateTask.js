@@ -36,7 +36,7 @@ export default function CreateTask() {
         try {
             await axios.post(`${URL}/task/create/${task.disciplineId}`, {task: task.task, finalDate: task.finalDate}, headers);
             alert('Tarefa cadastrada!');
-            navigate('/task');
+            navigate(-1);
         } catch(e) {
             alert(e.response.data);
         }

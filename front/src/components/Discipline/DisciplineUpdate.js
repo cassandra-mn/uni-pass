@@ -16,7 +16,7 @@ export default function DisciplineUpdate() {
         try {
             await axios.put(`${URL}/discipline/update/${discipline.id}`, discipline, headers);
             alert('Alterações salvas com sucesso!');
-            navigate(`/discipline/${discipline.id}`);
+            navigate(-1);
         } catch(e) {
             console.log(e.response)
             alert(e.response.data);

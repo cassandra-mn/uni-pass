@@ -42,7 +42,7 @@ export default function CreateDiscipline() {
         try {
             await axios.post(`${URL}/discipline/create`, discipline, headers);
             alert('Disciplina cadastrada!');
-            navigate('/discipline');
+            navigate(-1);
         } catch(e) {
             alert(e.response.data);
         }

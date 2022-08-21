@@ -37,7 +37,7 @@ export default function DisciplineById() {
         if (confirm) {
             try {
                 await axios.delete(`${URL}/discipline/delete/${id}`, headers);
-                navigate('/discipline');
+                navigate(-1);
             } catch(e) {
                 alert(e.response.data);
             }
