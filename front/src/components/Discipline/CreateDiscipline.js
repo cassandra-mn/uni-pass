@@ -48,8 +48,6 @@ export default function CreateDiscipline() {
         }
     }
 
-    console.log(discipline)
-
     return (
         <Container>
             <Form onSubmit={register}>
@@ -75,7 +73,7 @@ function DialogSelect({colors, discipline, setDiscipline}) {
   
     return (
         <>
-            <Button onClick={handleClickOpen}>
+            <Button type='button' onClick={handleClickOpen}>
                 <div className='block'>
                     Selecione uma cor
                     {discipline.color ?
@@ -90,7 +88,7 @@ function DialogSelect({colors, discipline, setDiscipline}) {
                         {colors.map((color, id) => {
                             return <Option key={id} background={color.background} 
                                 onClick={() => setDiscipline({...discipline, color: color.background}) 
-                                & handleClose}>{color.name === discipline.color ? 'X' : ''}
+                                & handleClose}>{color.background === discipline.color ? 'X' : ''}
                             </Option>
                         })}
                     </Box>
@@ -158,7 +156,7 @@ const Option = styled.div`
     height: 30px;
     margin: 5px;
     border-radius: 50%;
-    color: white;
+    color: black;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 
+import Loading from '../Loading.js';
 import StorageContext from '../../contexts/StorageContext.js';
 
 export default function TestPage({changeState}) {
@@ -94,7 +95,7 @@ export default function TestPage({changeState}) {
             </Tests>
             <BasicSpeedDial />
         </Container>
-    ) : <>Loading</>;
+    ) : <Loading />;
 }
 
 function BasicSpeedDial() {

@@ -6,6 +6,7 @@ import axios from 'axios';
 import WeekCalendar from 'react-week-calendar';
 import 'react-week-calendar/dist/style.css';
 
+import Loading from '../Loading.js';
 import StorageContext from '../../contexts/StorageContext.js';
 
 export default function Timetable({changeState}) {
@@ -115,7 +116,7 @@ export default function Timetable({changeState}) {
                 modalComponent={ModalView}
             />
         </Container>
-    ) : <>Loading</>;
+    ) : <Loading />;
 }
 
 function HeaderCell({date}) {

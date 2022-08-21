@@ -8,6 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 
+import Loading from '../Loading.js';
 import StorageContext from '../../contexts/StorageContext.js';
 
 export default function DisciplineById() {
@@ -108,7 +109,7 @@ export default function DisciplineById() {
                 </div>
             </Discipline>
         </Container>
-    ) : <>Loading</>;
+    ) : <Loading />;
 }
 
 const Container = styled.div`

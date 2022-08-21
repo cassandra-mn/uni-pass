@@ -3,6 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 
+import Loading from '../Loading.js';
 import StorageContext from '../../contexts/StorageContext.js';
 
 export default function CreateTask() {
@@ -54,7 +55,7 @@ export default function CreateTask() {
                 <Button className='submit' type='submit'>Cadastrar Tarefa</Button>
             </Form>
         </Container>
-    ) : <>Loading</>;
+    ) : <Loading />;
 }
 
 const Container = styled.div`

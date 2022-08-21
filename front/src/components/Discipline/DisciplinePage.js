@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 
+import Loading from '../Loading';
 import StorageContext from '../../contexts/StorageContext';
 
 export default function DisciplinePage({changeState}) {
@@ -46,7 +47,7 @@ export default function DisciplinePage({changeState}) {
             </Disciplines>
             <BasicSpeedDial />
         </Container>
-    ) : <>Loading</>;
+    ) : <Loading />;
 }
 
 function BasicSpeedDial() {

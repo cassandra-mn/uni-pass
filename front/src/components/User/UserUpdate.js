@@ -3,6 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 
+import Loading from '../Loading.js';
 import StorageContext from '../../contexts/StorageContext.js';
 
 export default function UserUpdate({changeState}) {
@@ -47,8 +48,7 @@ export default function UserUpdate({changeState}) {
             </Form>
             <Button className='delete' onClick={() => navigate('/user/delete')}>Excluir conta</Button>
         </Container>
-    ) : 
-    <>Loading</>;
+    ) : <Loading />;
 }
 
 const Container = styled.div`

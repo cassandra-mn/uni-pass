@@ -3,6 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 
+import Loading from '../Loading.js';
 import StorageContext from '../../contexts/StorageContext.js';
 
 export default function CreateTest() {
@@ -54,7 +55,7 @@ export default function CreateTest() {
                 <Button className='submit' type='submit'>Cadastrar Prova</Button>
             </Form>
         </Container>
-    ) : <>Loading</>;
+    ) : <Loading />;
 }
 
 

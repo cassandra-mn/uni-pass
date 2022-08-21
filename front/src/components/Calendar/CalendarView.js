@@ -14,6 +14,7 @@ import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 
+import Loading from '../Loading';
 import StorageContext from '../../contexts/StorageContext';
 
 export default function CalendarView({changeState}) {
@@ -151,7 +152,7 @@ export default function CalendarView({changeState}) {
             : ''
             }
         </Container>
-    ) : <>Loading</>;
+    ) : <Loading />;
 }
 
 const Container = styled.div`
